@@ -6,9 +6,8 @@
   <title>Class X Boards 2026</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background: linear-gradient(135deg, #3d4e7a 0%, #4a3f7a 25%, #7a3f6a 50%, #2a5a8a 75%, #1a6a9a 100%);
       background-attachment: fixed;
       color: #fff;
       font-family: 'Roboto Mono', monospace;
@@ -20,10 +19,26 @@
     }
     h1 {
       font-size: 2.2rem;
-      text-shadow: 0 0 10px rgba(255,255,255,0.5);
-      margin-bottom: 1.3rem;
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
+      margin-bottom: 0.5rem;
       text-align: center;
       letter-spacing: 1px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #e0e0e0;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .subtitle a {
+      color: #ffeb3b;
+      text-decoration: none;
+      border-bottom: 2px solid #ffeb3b;
+      transition: all 0.3s ease;
+    }
+    .subtitle a:hover {
+      color: #fff;
+      text-decoration: underline;
     }
     #examList {
       width: 100%;
@@ -33,26 +48,26 @@
       gap: 1.1rem;
     }
     .subject {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       padding: 20px 25px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       cursor: pointer;
       position: relative;
       transition: all 0.3s ease;
       overflow: hidden;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.15);
     }
     .subject:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     }
     .subject.highlight {
       border: 2px solid #00f2fe;
       box-shadow: 0 0 20px rgba(0,242,254,0.6), inset 0 0 20px rgba(0,242,254,0.2);
-      background: rgba(0,242,254,0.15);
+      background: rgba(0,242,254,0.12);
       transform: scale(1.05);
       z-index: 3;
     }
@@ -69,7 +84,7 @@
     }
     .countdown {
       font-size: 1rem;
-      color: #e0f7fa;
+      color: #b3e5fc;
       font-weight: 500;
       margin: 0.2em 0;
     }
@@ -83,11 +98,11 @@
     .portions {
       margin-top: 15px;
       padding: 15px 12px 0 12px;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.25);
       border-left: 4px solid #00f2fe;
-      color: #fff;
+      color: #f0f0f0;
       font-size: 0.95rem;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
       border-radius: 8px;
       max-height: 380px;
       overflow-y: auto;
@@ -99,8 +114,8 @@
       padding-left: 20px;
     }
     .portions li {
-      margin: 6px 0;
-      line-height: 1.5;
+      margin: 8px 0;
+      line-height: 1.6;
     }
     .subject.open .portions {
       display: block;
@@ -109,13 +124,13 @@
       margin-top: 2.5rem;
       width: 100%;
       max-width: 600px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
       border-radius: 20px;
       height: 32px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.15);
     }
     #progressBar {
       height: 100%;
@@ -143,23 +158,20 @@
 </head>
 <body>
   <h1>Class X Boards 2026</h1>
+  <div class="subtitle">According To <a href="https://www.cbse.gov.in/cbsenew/documents/Tentative_DateSheet_24092025.pdf" target="_blank">Tentative Schedule</a> Released by CBSE</div>
   <div id="examList"></div>
-  <div id="progressContainer">
-    <div id="progressBar"></div>
-  </div>
+  <div id="progressContainer"><div id="progressBar"></div></div>
   <div id="finished">All exams completed! Well done, Champion!</div>
   <script>
     const exams = [
-      { subject: "Mathematics [041]", date: "2026-02-17", portions: `<b>Portions:</b><ul><li>Real Numbers, Polynomials</li><li>Pair Of Linear Equations, Quatratic Equations</li><li>Coordinate Geometry, Triangles</li><li>Circles, Areas related to circles</li><li>Intro to Trigonometry, Applications of Trigonometry</li><li>Arithmetic Progression, Surface areas & volumes</li><li>Statistics, Probability</li></ul>` },
-      { subject: "English [184]", date: "2026-02-21", portions: `<b>Sections:</b><ul><li>Reading: Unseen passages</li><li>Writing & Grammar: Letter, Paragraph, Grammar Topics</li><li>Literature: Textbook chapters, poems, extracts</li><li>Supplementary: Stories, extracts, long answers</li></ul>` },
-      { subject: "Science [086]", date: "2026-02-25", portions: `<b>Portions:</b><ul><li>Chemical Substances: Chemical Reactions, Acids & Bases, Metals & Non-metals, Carbon and its Compounds</li><li>World of Living: Life Processes, Control & Coordination, Reproduction, Heredity, Environment</li><li>Natural Phenomena: Light (Reflection & Refraction), Human Eye, Electricity, Magnetic Effect</li></ul>` },
-      { subject: "Artificial Intelligence [417]", date: "2026-02-27", portions: `<b>Units:</b><ul><li>Employability Skills, AI Project Cycle, AI Domains</li><li>Ethics in AI, Modeling, Data Analysis</li><li>Computer Vision, Natural Language Processing, Python</li></ul>` },
-      { subject: "Sanskrit [119]", date: "2026-02-28", portions: `<b>पुस्तकें एवं विषय:</b><ul><li>मणिका: सभी पाठ</li><li>व्याकरण: संधि, समास, उपसर्ग, प्रत्यय आदि</li><li>संवाद, पत्र, अनुच्छेद लेखन</li></ul>` },
-      { subject: "Social Science [087]", date: "2026-03-07", portions: `<b>Units:</b><ul><li>History, Geography, Political Science</li><li>Economics, Practical Components</li></ul>` },
+      { subject: "Mathematics [041]", date: "2026-02-17", portions: "<b>Portions:</b><ul><li>Real Numbers</li><li>Polynomials</li><li>Pair Of Linear Equations</li><li>Quatratic Equations</li><li>Coordinate Geometry</li><li>Triangles</li><li>Circles</li><li>Areas Related To Circles</li><li>Intro to Trigonometry</li><li>Applications of Trigonometry</li><li>Arithmetic Progression</li><li>Surface Areas & Volumes</li><li>Statistics</li><li>Probability</li></ul>" },
+      { subject: "English [184]", date: "2026-02-21", portions: "<b>Sections:</b><ul><li>Reading: Unseen passages</li><li>Writing & Grammar: Letter, Paragraph, Grammar Topics</li><li>Literature: Textbook chapters, poems, extracts</li><li>Supplementary: Stories, extracts, long answers</li></ul>" },
+      { subject: "Science [086]", date: "2026-02-25", portions: "<b>Portions:</b><ul><li>Chemical Substances: Chemical Reactions</li><li>Acids & Bases</li><li>Metals & Non-metals</li><li>Carbon and its Compounds</li><li>World of Living: Life Processes</li><li>Control & Coordination</li><li>Reproduction</li><li>Heredity</li><li>Environment</li><li>Natural Phenomena: Light (Reflection & Refraction)</li><li>Human Eye</li><li>Electricity</li><li>Magnetic Effect</li></ul>" },
+      { subject: "Artificial Intelligence [417]", date: "2026-02-27", portions: "<b>Units:</b><ul><li>Employability Skills</li><li>AI Project Cycle</li><li>AI Domains</li><li>Ethics in AI</li><li>Modeling</li><li>Data Analysis</li><li>Computer Vision</li><li>Natural Language Processing</li><li>Python</li></ul>" },
+      { subject: "Sanskrit [119]", date: "2026-02-28", portions: "<b>पुस्तकें एवं विषय:</b><ul><li>मणिका: सभी पाठ</li><li>व्याकरण: संधि</li><li>समास</li><li>उपसर्ग</li><li>प्रत्यय आदि</li><li>संवाद लेखन</li><li>पत्र लेखन</li><li>अनुच्छेद लेखन</li></ul>" },
+      { subject: "Social Science [087]", date: "2026-03-07", portions: "<b>Units:</b><ul><li>History</li><li>Geography</li><li>Political Science</li><li>Economics</li><li>Practical Components</li></ul>" },
     ];
-
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
     function getDateStr(dateStr) {
       const d = new Date(dateStr + 'T10:30:00');
       let dd = d.getDate(), mm = months[d.getMonth()], yy = d.getFullYear();
@@ -169,7 +181,6 @@
       else if (dd === 3 || dd === 23) suf = 'rd';
       return `${dd}${suf} ${mm} ${yy}`;
     }
-
     function formatTime(diff) {
       return {
         days: Math.floor(diff / (1000*60*60*24)),
@@ -177,47 +188,35 @@
         minutes: Math.floor((diff % (1000*60*60)) / (1000*60))
       };
     }
-
     const container = document.getElementById('examList');
     const progressBar = document.getElementById('progressBar');
     const finishedText = document.getElementById('finished');
-
     function updateCountdown() {
       container.innerHTML = '';
       const now = new Date();
       let completed = 0;
-
       const active = exams.filter(exam => now <= new Date(`${exam.date}T13:30:00`));
       completed = exams.length - active.length;
-
       active.forEach(exam => {
         const start = new Date(`${exam.date}T10:30:00`);
         const end = new Date(`${exam.date}T13:30:00`);
         const dayBefore = new Date(start.getTime() - 24*60*60*1000);
-
         const div = document.createElement('div');
         div.classList.add('subject');
-
-        // Highlight ONLY 24 hours before exam
         if (now >= dayBefore && now < start) {
           div.classList.add('highlight');
         }
-
         const title = document.createElement('h2');
         title.textContent = exam.subject;
         div.appendChild(title);
-
         const dateDiv = document.createElement('div');
         dateDiv.className = 'exam-date';
         dateDiv.textContent = getDateStr(exam.date);
         div.appendChild(dateDiv);
-
         const countdownP = document.createElement('div');
         countdownP.className = 'countdown';
-
         const messageP = document.createElement('div');
         messageP.className = 'message';
-
         if (now >= dayBefore && now < start) {
           const subjectName = exam.subject.split('[')[0].trim();
           messageP.textContent = `All the best for ${subjectName}!`;
@@ -227,28 +226,22 @@
         } else if (now >= start && now <= end) {
           countdownP.textContent = 'Exam in progress...';
         }
-
         div.appendChild(countdownP);
         div.appendChild(messageP);
-
         const portionDiv = document.createElement('div');
         portionDiv.className = 'portions';
         portionDiv.innerHTML = exam.portions;
         div.appendChild(portionDiv);
-
         div.addEventListener('click', function(e){
           e.stopPropagation();
           document.querySelectorAll('.subject').forEach(subj => subj !== div && subj.classList.remove('open'));
           div.classList.toggle('open');
         });
-
         container.appendChild(div);
       });
-
       progressBar.style.width = (completed / exams.length) * 100 + '%';
       finishedText.style.display = completed === exams.length ? 'block' : 'none';
     }
-
     updateCountdown();
     setInterval(updateCountdown, 60000);
   </script>
