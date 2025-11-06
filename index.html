@@ -5,269 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Class X Boards 2026</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&display=swap');
-    html,body {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono&display=swap');
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
-      width: 100vw;
     }
     body {
-      --background1: #d0eafa;
-      --background2: #bcaefd;
-      --background3: #f5e7ff;
-      --card-bg: rgba(255,255,255,0.27);
-      --card-blur: blur(18px);
-      --border: rgba(191, 147, 255, 0.3);
-      --accent-1: #812DE4;
-      --accent-2: #63efff;
-      --accent-glow: #b9a4f1;
-      --card-hover: rgba(255,255,255,0.40);
-      --warning: #fff199;
-      --progress: linear-gradient(90deg,#6b73ff, #35e2ff,#b98aff, #abb2ea);
-      background: linear-gradient(125deg, var(--background1), var(--background2), var(--background3) 120%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      font-family: 'Montserrat', 'Roboto Mono', monospace, sans-serif;
-      color: #24304a;
-      transition: background 1s;
-      padding: 0 0 4em 0;
-    }
-    body::before, body::after {
-      content:"";
-      z-index: 0;
-      position: fixed;
-      width: 60vw; height: 60vw;
-      left: 40vw; top: -15vw;
-      background: radial-gradient(circle at 40% 50%, var(--accent-2) 0, transparent 78%);
-      filter: blur(80px);
-      opacity: 0.32;
-      pointer-events:none;
-    }
-    body::after {
-      left: -32vw; top: 34vh;
-      width: 64vw; height: 60vw;
-      background: radial-gradient(circle at 65% 60%, var(--accent-1) 0, transparent 90%);
-      filter: blur(90px);
-      opacity: 0.24;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      padding: 2rem 1rem 4rem 1rem;
     }
     h1 {
-      font-family: Montserrat, monospace;
-      font-size: 2.65rem;
+      font-size: 2.5rem;
       font-weight: 700;
-      letter-spacing: 2px;
-      margin: 2.0rem 0 0.5rem 0;
-      line-height: 1.13;
       text-align: center;
-      color: #3b226b;
-      text-shadow: 0 2px 12px #e1dcfd70, 0 6px 24px #bbb3ef44;
-      position: relative;
-      z-index: 2;
-      backdrop-filter: blur(3px);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .subtitle {
-      font-size: 1.07rem;
+      font-size: 1.05rem;
       text-align: center;
-      margin: 0 0 1.7rem 0;
-      color: #4c406b;
-      position: relative;
-      z-index: 2;
-      transition: all 0.18s;
-    }
-    .subtitle .scheduletag {
-      text-decoration: underline 2.5px solid #433de7;
-      color: #3b226b;
-      font-weight: 700;
-      margin: 0 4px;
-      transition: color 0.25s;
-    }
-    .subtitle .scheduletag:hover {
-      color: #ff5722;
+      margin-bottom: 2rem;
+      color: #f0f0f0;
     }
     .subtitle a {
-      color: inherit;
+      color: #ffd700;
       text-decoration: none;
+      border-bottom: 2px solid #ffd700;
+      transition: all 0.3s;
+    }
+    .subtitle a:hover {
+      color: #fff;
+      border-bottom-color: #fff;
     }
     #examList {
-      width: 96vw;
-      max-width: 735px;
-      margin: 0 auto 1.2em auto;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
       display: flex;
       flex-direction: column;
-      gap: 1.45rem;
-      z-index: 2;
-      position: relative;
+      gap: 1.3rem;
     }
     .subject {
-      background: var(--card-bg);
-      backdrop-filter: var(--card-blur);
-      border-radius: 1.3em;
-      box-shadow: 0 8px 44px 0 rgba(91,71,130,0.13), 0 1.5px 14px 0 var(--accent-glow);
-      border: 1.7px solid var(--border);
-      padding: 1.45em 1.45em 1.2em 1.3em;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       cursor: pointer;
-      position: relative;
-      transition: box-shadow 0.2s, background 0.25s, border 0.25s, transform 0.12s;
-      overflow: hidden;
-      text-align: left;
-      font-size: 1.39rem;
-      user-select: none;
-      margin: 0 auto;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .subject:hover, .subject.open {
-      background: var(--card-hover);
-      border-color: #5b38fe;
-      box-shadow: 0 16px 52px 0 #a2a2ff36, 0 3px 16px 0 #ba7ffa16, 0 2px 16px var(--accent-2);
-      transform: scale(1.025) translateY(-2px);
-      z-index: 6;
+    .subject:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.2);
     }
     .subject.highlight {
-      border: 3px solid var(--accent-1);
-      background: rgba(246,227,255,0.24);
-      animation: pop 1.1s cubic-bezier(.17,.67,.83,.67);
-      box-shadow: 0 0 0 4px #dbcbff50, 0 7px 20px 0 #6428ee23;
-    }
-    @keyframes pop {
-      0% {transform: scale(1.004);}
-      15% {transform: scale(1.05);}
-      30% {transform: scale(1.018);}
-      50% {transform: scale(1.065);}
-      90% {transform: scale(1.025);}
-      100%{transform: scale(1.025);}
+      border: 2px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+      background: rgba(255,215,0,0.15);
     }
     .subject h2 {
-      margin: 0 0 0.20em 0;
-      font-size: 1.29em;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
       font-weight: 700;
-      color: #211173;
-      letter-spacing: 0.04em;
+      color: #fff;
     }
     .exam-date {
-      font-size: 1.19rem;
-      color: #733af5;
-      margin-bottom: .31rem;
+      font-size: 1.1rem;
+      color: #ffd700;
+      margin-bottom: 0.5rem;
       font-weight: 600;
     }
     .countdown {
-      font-size: 1.07rem;
-      color: #8ac6ff;
-      font-weight: 600;
+      font-size: 1rem;
+      color: #b3e5fc;
+      font-weight: 500;
     }
     .message {
-      font-size: 1.21rem;
-      margin-top: 0.46em;
-      color: #fff153;
-      font-weight: 800;
-      text-shadow: 0 0 10px #fff1;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #ffd700;
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(255,215,0,0.5);
     }
     .portions {
-      background: #f8f8ffef;
-      color: #412a93;
-      margin-top: 1.18em;
-      padding: 1em 1.2em 1.1em 1.29em;
-      border-left: 5px solid var(--accent-2);
-      border-radius: 0.7em;
-      font-size: 1.07rem;
-      line-height: 1.7;
-      font-family: 'Roboto Mono', monospace;
-      box-shadow: 0 9px 18px #c8bcfa22;
-      position:relative;
-      display: none;
-      z-index: 20;
-      animation: fadeIn 0.32s ease;
-      transition: max-height 0.28s;
-      max-height: 390px;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
+      border-left: 4px solid #ffd700;
+      color: #f0f0f0;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      max-height: 400px;
       overflow-y: auto;
-      word-break: break-word;
+      display: none;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .portions ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+    .portions li {
+      margin: 6px 0;
+    }
+    .portions b {
+      color: #ffd700;
     }
     .subject.open .portions {
       display: block;
+      animation: slideDown 0.3s ease;
     }
-    .portions b {
-      color: #7342ff;
-    }
-    .portions ul {
-      margin: 10px 0 4px 0;
-      padding-left: 20px;
-      font-size: inherit;
-    }
-    .portions li {
-      margin: 2.5px 0;
-      line-height: 1.66;
-      font-size: 1.03em;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px);}
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px);}
       to { opacity: 1; transform: translateY(0);}
     }
     #progressContainer {
-      margin: 3.1em auto 0 auto;
-      width: 96vw;
-      max-width: 735px;
-      background: rgba(245,242,255,0.45);
-      border-radius: 100em;
-      height: 41px;
-      box-shadow: 0 3.5px 24px #4c3e7e1b;
+      margin: 2.5rem auto 0 auto;
+      width: 100%;
+      max-width: 700px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      height: 32px;
       overflow: hidden;
-      position: relative;
-      z-index: 4;
-      border: 1.2px solid #bba8fa57;
-      transition: background 0.18s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
     #progressBar {
       height: 100%;
       width: 0;
-      background: var(--progress);
-      border-radius: 100em 0 0 100em;
-      box-shadow: 0 2px 16px 2px #b198fa60;
-      animation: shimmer 2.5s infinite linear;
-      transition: width 1s cubic-bezier(.77,0,.18,1);
+      background: linear-gradient(90deg,#00f2fe,#4facfe,#667eea);
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,242,254,0.6);
+      transition: width 0.8s ease;
+      animation: shimmer 2s infinite;
     }
     @keyframes shimmer {
       0%,100% {opacity:1;}
-      26% {opacity:.86;}
-      52% {opacity:1;}
-      75% {opacity:.93;}
+      50% {opacity:0.8;}
     }
     #finished {
-      margin: 2.8em auto 0 auto;
-      font-size: 2.13rem;
-      color: var(--accent-1);
-      text-shadow: 0 0 22px #bb99ffcc;
+      margin-top: 3rem;
+      font-size: 2rem;
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255,215,0,0.6);
       display: none;
-      font-family: Montserrat, monospace;
-      font-weight: 900;
-      letter-spacing: 1.2px;
+      font-weight: 800;
       text-align: center;
-      z-index: 2;
-      position: relative;
     }
-    @media (max-width: 650px) {
-      h1 {font-size: 1.42rem;}
-      .subtitle {font-size: .98rem;}
-      #examList {gap: .97rem;}
-      .subject {padding: 0.68em 0.6em 0.65em 0.7em;}
-      .portions {font-size: 0.96rem; max-height: 188px;}
-      #progressContainer {height: 1.2em;}
-      #finished {font-size: 1.11rem;}
-    }
-    @media (max-width:360px) {
-      h1 {font-size: 1.07rem;}
-      .subject h2 {font-size: 0.95em;}
-      .exam-date {font-size: 0.93rem;}
-      .countdown {font-size: 0.77rem;}
-      .message {font-size: 0.91rem;}
-      .portions {font-size: 0.79rem; max-height: 120px;}
-      #progressContainer {height: 0.97em;}
-      #finished {font-size: 0.7rem;}
+    @media (max-width: 600px) {
+      h1 {font-size: 1.8rem;}
+      .subtitle {font-size: 0.95rem;}
+      .subject {padding: 1rem;}
+      .subject h2 {font-size: 1.2rem;}
+      .portions {font-size: 0.85rem; max-height: 250px;}
     }
   </style>
 </head>
 <body>
   <h1>Class X Boards 2026</h1>
   <div class="subtitle">
-    According to <a href="https://www.cbse.gov.in/cbsenew/documents/Tentative_DateSheet_24092025.pdf" target="_blank">
-      <span class="scheduletag">Tentative Schedule</span>
-    </a> released by CBSE
+    According to <a href="https://www.cbse.gov.in/cbsenew/documents/Tentative_DateSheet_24092025.pdf" target="_blank">Tentative Schedule</a> released by CBSE
   </div>
   <div id="examList"></div>
   <div id="progressContainer"><div id="progressBar"></div></div>
@@ -277,7 +180,7 @@
       {
         subject: "Mathematics [041]",
         date: "2026-02-17",
-        portions: `<b>Portions:</b><ul>
+        portions: `<b>Chapters:</b><ul>
           <li>Real Numbers</li>
           <li>Polynomials</li>
           <li>Pair Of Linear Equations In Two Variables</li>
@@ -297,21 +200,21 @@
       {
         subject: "English [184]",
         date: "2026-02-21",
-        portions: `<b>First Flight:</b>
+        portions: `<b>First Flight (Prose):</b>
           <ul>
             <li>A Letter to God</li>
             <li>Nelson Mandela: Long Walk to Freedom</li>
-            <li>Two Stories about Flying</li>
+            <li>Two Stories about Flying (His First Flight & Black Aeroplane)</li>
             <li>From the Diary of Anne Frank</li>
             <li>The Hundred Dresses – I</li>
             <li>The Hundred Dresses – II</li>
-            <li>Glimpses of India</li>
+            <li>Glimpses of India (A Baker from Goa, Coorg, Tea from Assam)</li>
             <li>Mijbil the Otter</li>
             <li>Madam Rides the Bus</li>
             <li>The Sermon at Benares</li>
             <li>The Proposal (Play)</li>
           </ul>
-          <b>Poems:</b>
+          <b>First Flight (Poetry):</b>
           <ul>
             <li>Dust of Snow</li>
             <li>Fire and Ice</li>
@@ -324,10 +227,10 @@
             <li>The Tale of Custard the Dragon</li>
             <li>For Anne Gregory</li>
           </ul>
-          <b>Footprints without Feet:</b>
+          <b>Footprints without Feet (Supplementary Reader):</b>
           <ul>
             <li>A Triumph of Surgery</li>
-            <li>The Thief’s Story</li>
+            <li>The Thief's Story</li>
             <li>The Midnight Visitor</li>
             <li>A Question of Trust</li>
             <li>Footprints without Feet</li>
@@ -341,10 +244,12 @@
       {
         subject: "Science [086]",
         date: "2026-02-25",
-        portions: `<b>Portions:</b><ul>
+        portions: `<b>Chapters:</b><ul>
           <li>Chemical Reactions and Equations</li>
           <li>Acids, Bases, and Salts</li>
           <li>Metals and Non-metals</li>
+          <li>Carbon and its Compounds</li>
+          <li>Periodic Classification of Elements</li>
           <li>Life Processes</li>
           <li>Control and Coordination</li>
           <li>How do Organisms Reproduce</li>
@@ -375,55 +280,51 @@
       {
         subject: "Sanskrit [119]",
         date: "2026-02-28",
-        portions: `<b>CBSE Class 10 Sanskrit Communicative (Manika) Syllabus 2025-26:</b>
-        <ul>
-          <li>अपठित गद्यांश (Reading Comprehension)</li>
-          <li>रचनात्मक कार्य: <ul>
-            <li>- औपचारिक/अनौपचारिक पत्र लेखन</li>
-            <li>- चित्रवर्णन अथवा अनुच्छेद लेखन</li>
-            <li>- संवाद लेखन अथवा कथा लेखन</li>
-            <li>- हिंदी/अंग्रेज़ी से संस्कृत अनुवाद</li>
-          </ul></li>
-          <li>व्याकरण (Applied Grammar): <ul>
-            <li>- संधि</li>
-            <li>- समास</li>
-            <li>- प्रत्यय</li>
-            <li>- वाच्यप्रकरण</li>
-            <li>- समय</li>
-            <li>- अव्ययपदानि</li>
-            <li>- अशुद्धि संशोधन</li>
-          </ul></li>
-          <li>साहित्य (Literature): <ul>
-            <li>Textbook: मणिका (Manika) - All prescribed chapters & poems for 2025-26:</li>
-            <li>1. संवादः</li>
-            <li>2. धर्मक्षेत्रे कुरुक्षेत्रे</li>
-            <li>3. मेघः अयम्</li>
-            <li>4. सौदामिनी</li>
-            <li>5. व्रजन्तु सुतराम् रम्याणि</li>
-            <li>6. अपेक्षा</li>
-            <li>7. हिमालयः</li>
-          </ul></li>
-        </ul>
-        <b>आंतरिक मूल्याङ्कन (Internal Assessment):</b>
-        <ul>
-          <li>Periodic Assessment</li>
-          <li>Portfolio</li>
-          <li>Multiple Assessments</li>
-          <li>Speaking, Reading, Writing Skills</li>
-        </ul>`
+        portions: `<b>साहित्यम्: मणिका (Literature: Manika):</b>
+          <ul>
+            <li>संवादः</li>
+            <li>सुभाषितानि</li>
+            <li>धर्मक्षेत्रे कुरुक्षेत्रे</li>
+            <li>मेघः अयम्</li>
+            <li>सौदामिनी</li>
+            <li>व्रजन्तु सुतराम् रम्याणि</li>
+            <li>अपेक्षा</li>
+            <li>हिमालयः</li>
+            <li>विशिष्ट: पथः</li>
+            <li>शिवा-संकल्प</li>
+          </ul>
+          <b>व्याकरण (Grammar):</b>
+          <ul>
+            <li>संधि</li>
+            <li>समास</li>
+            <li>प्रत्यय</li>
+            <li>वाच्यप्रकरण</li>
+            <li>शब्दरूपाणि</li>
+            <li>धातुरूपाणि</li>
+            <li>अव्ययपदानि</li>
+            <li>अशुद्धि संशोधन</li>
+          </ul>
+          <b>रचनात्मक कार्य (Composition):</b>
+          <ul>
+            <li>पत्र लेखन (Letter Writing)</li>
+            <li>चित्रवर्णन (Picture Description)</li>
+            <li>संवाद लेखन (Dialogue Writing)</li>
+            <li>अनुवाद (Translation)</li>
+          </ul>`
       },
       {
         subject: "Social Science [087]",
         date: "2026-03-07",
-        portions: `<b>Chapters:</b>
+        portions: `<b>History:</b>
           <ul>
-            <li><b>History</b></li>
             <li>The Rise of Nationalism in Europe</li>
             <li>Nationalism in India</li>
             <li>The Making of a Global World</li>
             <li>The Age of Industrialisation</li>
             <li>Print Culture and the Modern World</li>
-            <li><b>Geography</b></li>
+          </ul>
+          <b>Geography:</b>
+          <ul>
             <li>Resources and Development</li>
             <li>Forest and Wildlife Resources</li>
             <li>Water Resources</li>
@@ -431,14 +332,17 @@
             <li>Minerals and Energy Resources</li>
             <li>Manufacturing Industries</li>
             <li>Lifelines of National Economy</li>
-            <li><b>Political Science</b></li>
+          </ul>
+          <b>Political Science:</b>
+          <ul>
             <li>Power Sharing</li>
             <li>Federalism</li>
             <li>Gender, Religion and Caste</li>
             <li>Political Parties</li>
             <li>Outcomes of Democracy</li>
-            <li>Challenges to Democracy</li>
-            <li><b>Economics</b></li>
+          </ul>
+          <b>Economics:</b>
+          <ul>
             <li>Development</li>
             <li>Sectors of the Indian Economy</li>
             <li>Money and Credit</li>
@@ -447,72 +351,88 @@
           </ul>`
       }
     ];
-    const months = [ "January","February","March","April","May","June","July","August","September","October","November","December" ];
+
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    
     function getDateStr(dateStr) {
       const d = new Date(dateStr + "T10:30:00");
-      let dd = d.getDate(), mm = months[d.getMonth()], yy = d.getFullYear();
-      let suf = "th";
-      if (dd === 1 || dd === 21 || dd === 31) suf = "st";
-      else if (dd === 2 || dd === 22) suf = "nd";
-      else if (dd === 3 || dd === 23) suf = "rd";
-      return `${dd}${suf} ${mm} ${yy} (10:30 AM)`;
+      const day = d.getDate();
+      const month = months[d.getMonth()];
+      const year = d.getFullYear();
+      
+      let suffix = "th";
+      if (day === 1 || day === 21 || day === 31) suffix = "st";
+      else if (day === 2 || day === 22) suffix = "nd";
+      else if (day === 3 || day === 23) suffix = "rd";
+      
+      return `${day}${suffix} ${month} ${year} (10:30 AM)`;
     }
+    
     function formatTimediff(diff) {
       const days = Math.floor(diff/(1000*60*60*24));
       const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
       const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
       return {days, hours, minutes};
     }
+    
     const container = document.getElementById("examList");
     const progressBar = document.getElementById("progressBar");
     const finishedText = document.getElementById("finished");
+    
     function updateCountdown() {
       container.innerHTML = "";
       const now = new Date();
       let completed = 0;
-      // Remove exams that have ended (after 1:30 PM)
+      
       const active = exams.filter(exam => {
         const end = new Date(exam.date + "T13:30:00");
         return now < end;
       });
+      
       completed = exams.length - active.length;
-      active.forEach((exam, i) => {
+      
+      active.forEach((exam) => {
         const start = new Date(exam.date + "T10:30:00");
         const end = new Date(exam.date + "T13:30:00");
         const dayBefore = new Date(start.getTime() - 24*60*60*1000);
+        
         const div = document.createElement("div");
         div.classList.add("subject");
-        // Highlight ONLY 24 hours before exam
+        
         if (now >= dayBefore && now < start) div.classList.add("highlight");
+        
         const title = document.createElement("h2");
         title.textContent = exam.subject;
         div.appendChild(title);
+        
         const dateDiv = document.createElement("div");
         dateDiv.className = "exam-date";
         dateDiv.textContent = getDateStr(exam.date);
         div.appendChild(dateDiv);
+        
         const countdownP = document.createElement("div");
         countdownP.className = "countdown";
         const messageP = document.createElement("div");
         messageP.className = "message";
+        
         if (now >= dayBefore && now < start) {
-          // Show all the best message
           const subjectName = exam.subject.split(" ")[0];
           messageP.textContent = `All the best for ${subjectName}!`;
         } else if (now < start) {
-          // Show countdown
           const {days, hours, minutes} = formatTimediff(start - now);
           countdownP.textContent = `${days}d ${hours}h ${minutes}m left`;
         } else if (now >= start && now < end) {
           countdownP.textContent = "Exam in progress...";
         }
+        
         div.appendChild(countdownP);
         div.appendChild(messageP);
+        
         const portionDiv = document.createElement("div");
         portionDiv.className = "portions";
         portionDiv.innerHTML = exam.portions;
         div.appendChild(portionDiv);
-        // Always allow clicking to open/close portions
+        
         div.addEventListener("click", function(e){
           e.stopPropagation();
           document.querySelectorAll(".subject").forEach(subj => {
@@ -520,14 +440,16 @@
           });
           div.classList.toggle("open");
         });
+        
         container.appendChild(div);
       });
-      // Progress Bar
+      
       progressBar.style.width = `${completed/exams.length*100}%`;
       finishedText.style.display = (completed === exams.length) ? "block" : "none";
     }
+    
     updateCountdown();
-    setInterval(updateCountdown, 60000); // every minute
+    setInterval(updateCountdown, 60000);
   </script>
 </body>
 </html>
