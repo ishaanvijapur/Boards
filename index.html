@@ -1,408 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class X Boards 2026 Countdown</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 50%, #dbeafe 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #1f2937;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .schedule-link {
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .schedule-link a {
-            color: #3b82f6;
-            text-decoration: none;
-            font-size: 1rem;
-            border-bottom: 2px solid #3b82f6;
-            transition: all 0.3s ease;
-        }
-
-        .schedule-link a:hover {
-            color: #1e40af;
-            border-bottom-color: #1e40af;
-        }
-
-        .progress-container {
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 20px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-label {
-            font-size: 0.9rem;
-            color: #4b5563;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(200, 200, 200, 0.3);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 10px;
-        }
-
-        .exams-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .exam-card {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 15px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .exam-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        .exam-card.highlight {
-            background: linear-gradient(135deg, rgba(191, 219, 254, 0.7), rgba(219, 234, 254, 0.7));
-            border: 2px solid #3b82f6;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .exam-card.completed {
-            background: rgba(220, 252, 231, 0.5);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .exam-card.completed .countdown-text {
-            color: #16a34a;
-            font-weight: 600;
-        }
-
-        .subject-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .exam-date {
-            font-size: 0.95rem;
-            color: #6b7280;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .countdown-text {
-            font-size: 1.1rem;
-            color: #3b82f6;
-            font-weight: 600;
-            margin-bottom: 15px;
-            min-height: 28px;
-        }
-
-        .all-the-best {
-            color: #dc2626;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 10px;
-            background: rgba(248, 113, 113, 0.1);
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .syllabus {
-            display: none;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .syllabus.show {
-            display: block;
-        }
-
-        .syllabus-title {
-            font-weight: 600;
-            color: #374151;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-        }
-
-        .syllabus-content {
-            font-size: 0.9rem;
-            color: #6b7280;
-            line-height: 1.8;
-        }
-
-        .syllabus-category {
-            margin-bottom: 12px;
-        }
-
-        .category-name {
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-
-        .category-items {
-            margin-left: 15px;
-            color: #6b7280;
-        }
-
-        .category-items div {
-            padding: 2px 0;
-            font-size: 0.9rem;
-        }
-
-        .finished-message {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(220, 252, 231, 0.5);
-            border-radius: 15px;
-            border: 2px solid #16a34a;
-            display: none;
-            margin-top: 40px;
-        }
-
-        .finished-message.show {
-            display: block;
-        }
-
-        .finished-message h2 {
-            font-size: 2rem;
-            color: #16a34a;
-            margin-bottom: 10px;
-        }
-
-        .finished-message p {
-            font-size: 1.1rem;
-            color: #047857;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .exams-container {
-                grid-template-columns: 1fr;
-            }
-
-            .exam-card {
-                padding: 20px;
-            }
-
-            .subject-name {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class X Boards 2026</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e5e9f2 50%, #b7c7e4 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 0 24px 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 32px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin-bottom: 12px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #546e7a;
+      margin-bottom: 2.2rem;
+      text-align: center;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .subtitle a {
+      color: #3366cc;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid #3366cc;
+      transition: all 0.3s ease;
+    }
+    .subtitle a:hover {
+      color: #1a4d99;
+      border-bottom-color: #1a4d99;
+    }
+    #examList {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      margin-bottom: 2.5rem;
+      width: 100%;
+    }
+    .subject {
+      background: linear-gradient(135deg, rgba(255,255,255,.6) 0%, rgba(240,245,250,.7) 100%);
+      border-radius: 14px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 15px rgba(26, 47, 74, 0.08);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(.4,0,.2,1);
+      border-left: 5px solid #3366cc;
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+    .subject:hover {
+      box-shadow: 0 8px 25px rgba(26, 47, 74, 0.15);
+      transform: translateY(-3px);
+      border-left-color: #2d5ab8;
+    }
+    .subject.highlight {
+      border-left-color: #10b981;
+      background: linear-gradient(135deg, rgba(240,253,250,0.8) 0%, rgba(220,252,231,0.7) 100%);
+      box-shadow: 0 8px 25px rgba(16,185,129,0.2);
+    }
+    .subject h2 {
+      font-size: 1.35rem;
+      color: #1f2937;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .exam-date {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    .countdown {
+      font-size: 1.1rem;
+      color: #3b82f6;
+      font-weight: 600;
+      margin-bottom: 15px;
+      min-height: 28px;
+    }
+    .message {
+      color: #059669;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+    .portions {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      max-height: 450px;
+      overflow-y: auto;
+      display: none;
+      text-align: left;
+    }
+    .portions b {
+      color: #1e3a8a;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .portions ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .portions li {
+      color: #334155;
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .portions li:before {
+      content: '•';
+      color: #2563eb;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .subject.open .portions {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #progressContainer {
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, rgba(240, 245, 250, 0.8) 0%, rgba(225, 235, 245, 0.8) 100%);
+      border-radius: 14px;
+      height: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(26, 47, 74, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      width: 100%;
+      border: 1px solid rgba(51, 102, 204, 0.08);
+    }
+    #progressBar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #3366cc 0%, #5a8fff 100%);
+      transition: width 0.8s ease;
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(51,102,204,0.4);
+    }
+    #finished {
+      margin-top: 2.5rem;
+      font-size: 1.6rem;
+      color: #10b981;
+      text-align: center;
+      display: none;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .subject { padding: 1.2rem; }
+      .portions { max-height: 300px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Class X Boards 2026</h1>
-            <div class="schedule-link">
-                <a href="https://www.cbse.gov.in/cbsenew/documents/Tentative_DateSheet_24092025.pdf" target="_blank">Tentative Schedule</a>
-                <span style="color: #6b7280;"> (According To Tentative Schedule)</span>
-            </div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Exams Completed: <span id="progress-text">0/6</span></div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-        </div>
-
-        <div class="exams-container" id="exams-container"></div>
-
-        <div class="finished-message" id="finished-message">
-            <h2>All Exams Completed!</h2>
-            <p>You have completed all your Class X Board exams. Best wishes for your results!</p>
-        </div>
+  <div class="container">
+    <h1>Class X Boards 2026</h1>
+    <div class="subtitle">
+      According To 
+      <a href="https://www.cbse.gov.in/cbsenew/documents/TentativeDateSheet24092025.pdf" target="_blank">
+        Tentative Schedule Released by CBSE
+      </a>
     </div>
+    <div id="examList"></div>
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+    <div id="finished">All exams completed! Well done, Champion!</div>
+  </div>
+  <script>
+    // Exam data structure
+    const exams = [
+      {
+        subject: 'Mathematics [041]',
+        date: '2026-02-17',
+        portions: `<b>Chapters</b><ul>
+          <li>Real Numbers</li>
+          <li>Polynomials</li>
+          <li>Pair Of Linear Equations in Two Variables</li>
+          <li>Quadratic Equations</li>
+          <li>Arithmetic Progressions</li>
+          <li>Triangles</li>
+          <li>Coordinate Geometry</li>
+          <li>Introduction to Trigonometry</li>
+          <li>Some Applications of Trigonometry</li>
+          <li>Circles</li>
+          <li>Areas Related to Circles</li>
+          <li>Surface Areas & Volumes</li>
+          <li>Statistics</li>
+          <li>Probability</li>
+        </ul>`
+      },
+      {
+        subject: 'English [184]',
+        date: '2026-02-21',
+        portions: `<b>Textbooks & Sections</b><ul>
+          <li><span class="category-name">First Flight:</span>
+            <div class="category-items">
+              <div>All textbook chapters, poems, extracts</div>
+            </div>
+          </li>
+          <li><span class="category-name">Footprints without Feet:</span>
+            <div class="category-items">
+              <div>All supplementary stories, extracts</div>
+            </div>
+          </li>
+          <li><span class="category-name">Reading:</span>
+            <div class="category-items">
+              <div>Unseen passages</div>
+            </div>
+          </li>
+          <li><span class="category-name">Writing & Grammar:</span>
+            <div class="category-items">
+              <div>Letter, Paragraph, Grammar Topics</div>
+            </div>
+          </li>
+        </ul>`
+      },
+      {
+        subject: 'Science [086]',
+        date: '2026-02-25',
+        portions: `<b>Chapters</b><ul>
+          <li>Chemical Reactions and Equations</li>
+          <li>Acids, Bases and Salts</li>
+          <li>Metals and Non-metals</li>
+          <li>Carbon and its Compounds</li>
+          <li>Periodic Classification of Elements</li>
+          <li>Life Processes</li>
+          <li>Control and Coordination</li>
+          <li>How do Organisms Reproduce?</li>
+          <li>Heredity and Evolution</li>
+          <li>Light – Reflection and Refraction</li>
+          <li>The Human Eye and the Colourful World</li>
+          <li>Electricity</li>
+          <li>Magnetic Effects of Electric Current</li>
+          <li>Sources of Energy</li>
+          <li>Our Environment</li>
+          <li>Management of Natural Resources</li>
+        </ul>`
+      },
+      {
+        subject: 'Artificial Intelligence [417]',
+        date: '2026-02-27',
+        portions: `<b>Units</b><ul>
+          <li>Employability Skills</li>
+          <li>AI Project Cycle</li>
+          <li>Domains of AI</li>
+          <li>Ethical frameworks in AI</li>
+          <li>Modeling, Data Analysis</li>
+          <li>Computer Vision & NLP</li>
+          <li>Advanced Python for AI</li>
+        </ul>`
+      },
+      {
+        subject: 'Sanskrit [119]',
+        date: '2026-02-28',
+        portions: `<b>Textbook Topics</b><ul>
+          <li>Based on NCERT syllabus 2025-26</li>
+          <li>Literature, grammar, comprehension, translation</li>
+          <li>Specific chapters: Refer to CBSE latest syllabus for exact portions</li>
+        </ul>`
+      },
+      {
+        subject: 'Social Science [087]',
+        date: '2026-03-07',
+        portions: `<b>Units</b><ul>
+          <li>History: The Rise of Nationalism in Europe, Nationalism in India, Making of a Global World</li>
+          <li>Geography: Resources & Development, Water Resources, Agriculture, Minerals and Energy, Manufacturing Industries, Lifelines of National Economy</li>
+          <li>Political Science: Power Sharing, Federalism, Gender Religion and Caste, Political Parties, Outcomes of Democracy</li>
+          <li>Economics: Development, Sectors, Money & Credit, Globalisation & Indian Economy, Consumer Rights</li>
+        </ul>`
+      }
+    ];
 
-    <script>
-        const exams = [
-            {
-                subject: 'Mathematics',
-                code: '041',
-                date: 'February 15, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('February 15, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div>1. Number Systems</div>
-                        <div>2. Polynomials</div>
-                        <div>3. Pair of Linear Equations in Two Variables</div>
-                        <div>4. Quadratic Equations</div>
-                        <div>5. Arithmetic Progressions</div>
-                        <div>6. Triangles</div>
-                        <div>7. Coordinate Geometry</div>
-                        <div>8. Introduction to Trigonometry</div>
-                        <div>9. Some Applications of Trigonometry</div>
-                        <div>10. Circles</div>
-                        <div>11. Constructions</div>
-                        <div>12. Areas Related to Circles</div>
-                        <div>13. Surface Areas and Volumes</div>
-                        <div>14. Statistics</div>
-                        <div>15. Probability</div>
-                    </div>
-                `
-            },
-            {
-                subject: 'English',
-                code: '184',
-                date: 'February 20, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('February 20, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div class="syllabus-category">
-                            <div class="category-name">First Flight</div>
-                            <div class="category-items">
-                                <div>• The Real Story of AH-Q</div>
-                                <div>• Fog</div>
-                                <div>• The Tale of Custard the Dragon</div>
-                                <div>• A Triumph of Surgery</div>
-                                <div>• The Sermon at Benares</div>
-                                <div>• The Proposal</div>
-                            </div>
-                        </div>
-                        <div class="syllabus-category">
-                            <div class="category-name">Footprints Without Feet</div>
-                            <div class="category-items">
-                                <div>• A Triumph of Surgery</div>
-                                <div>• The Thief's Story</div>
-                                <div>• The Midnight Visitor</div>
-                                <div>• A Question of Trust</div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                subject: 'Science',
-                code: '086',
-                date: 'February 25, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('February 25, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div>1. Chemical Reactions and Equations</div>
-                        <div>2. Acids, Bases and Salts</div>
-                        <div>3. Metals and Non-metals</div>
-                        <div>4. Carbon and its Compounds</div>
-                        <div>5. Periodic Classification of Elements</div>
-                        <div>6. Control and Coordination</div>
-                        <div>7. How do Organisms Reproduce</div>
-                        <div>8. Heredity and Evolution</div>
-                        <div>9. Light - Reflection and Refraction</div>
-                        <div>10. The Human Eye and the Colourful World</div>
-                        <div>11. Electricity</div>
-                        <div>12. Magnetic Effects of Electric Current</div>
-                        <div>13. Sources of Energy</div>
-                    </div>
-                `
-            },
-            {
-                subject: 'Artificial Intelligence',
-                code: '417',
-                date: 'March 5, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('March 5, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div>1. AI Fundamentals</div>
-                        <div>2. Machine Learning Basics</div>
-                        <div>3. Data Representation and Processing</div>
-                        <div>4. Ethics in AI</div>
-                        <div>5. Natural Language Processing</div>
-                        <div>6. Computer Vision Fundamentals</div>
-                        <div>7. Practical Applications of AI</div>
-                    </div>
-                `
-            },
-            {
-                subject: 'Sanskrit',
-                code: '119',
-                date: 'March 10, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('March 10, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div>1. संस्कृत व्याकरण (Sanskrit Grammar)</div>
-                        <div>2. पद्य साहित्य (Poetry Literature)</div>
-                        <div>3. गद्य साहित्य (Prose Literature)</div>
-                        <div>4. नाटक (Drama)</div>
-                        <div>5. संवाद कौशल (Conversational Skills)</div>
-                        <div>6. संस्कृत संस्कृति (Sanskrit Culture)</div>
-                    </div>
-                `
-            },
-            {
-                subject: 'Social Science',
-                code: '087',
-                date: 'March 15, 2026',
-                time: '10:30 AM',
-                timestamp: new Date('March 15, 2026 10:30:00').getTime(),
-                syllabus: `
-                    <div class="syllabus-content">
-                        <div class="syllabus-category">
-                            <div class="category-name">History</div>
-                            <div class="category-items">
-                                <div>• The Rise of Nationalism in Europe</div>
-                                <div>
+    const months = [
+      'January','February','March','April','May','June',
+      'July','August','September','October','November','December'
+    ];
+    function getDateStr(dateStr) {
+      const d = new Date(dateStr+'T10:30:00');
+      let dd = d.getDate();
+      let mm = months[d.getMonth()];
+      let yy = d.getFullYear();
+      let suf = 'th';
+      if (dd === 1 || dd === 21 || dd === 31) suf = 'st';
+      else if (dd === 2 || dd === 22) suf = 'nd';
+      else if (dd === 3 || dd === 23) suf = 'rd';
+      return `${dd}${suf} ${mm} ${yy}`;
+    }
+    function formatTimediff(diff) {
+      const days = Math.floor(diff/1000/60/60/24);
+      const hours = Math.floor(diff/1000/60/60)%24;
+      const minutes = Math.floor(diff/1000/60)%60;
+      return {days, hours, minutes};
+    }
+
+    const container = document.getElementById('examList');
+    const progressBar = document.getElementById('progressBar');
+    const finishedText = document.getElementById('finished');
+
+    function updateCountdown() {
+      container.innerHTML = '';
+      const now = new Date();
+      let completed = 0;
+      // Exams still upcoming (after 1:30 PM exam day)
+      const active = exams.filter(exam => {
+        // ends after 1:30 PM
+        const end = new Date(exam.date+'T13:30:00');
+        return now < end;
+      });
+      completed = exams.length - active.length;
+      // For highlight, 24h before any exam, only that subject gets .highlight
+      active.forEach(exam => {
+        const start = new Date(exam.date+'T10:30:00');
+        const end = new Date(exam.date+'T13:30:00');
+        const dayBefore = new Date(start.getTime() - 24*60*60*1000);
+        const div = document.createElement('div');
+        div.classList.add('subject');
+        if (now >= dayBefore && now < start) {
+          div.classList.add('highlight');
+        }
+        const title = document.createElement('h2');
+        title.textContent = exam.subject;
+        div.appendChild(title);
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'exam-date';
+        dateDiv.textContent = getDateStr(exam.date);
+        div.appendChild(dateDiv);
+        const countdownP = document.createElement('div');
+        countdownP.className = 'countdown';
+        const messageP = document.createElement('div');
+        messageP.className = 'message';
+        if (now >= dayBefore && now < start) {
+          const subjectName = exam.subject.split(' [')[0].trim();
+          messageP.textContent = `All the best for ${subjectName}!`;
+        } else if (now < dayBefore) {
+          const diff = start-now;
+          const {days, hours, minutes} = formatTimediff(diff);
+          countdownP.textContent = `${days}d ${hours}h ${minutes}m left`;
+        } else if (now >= start && now < end) {
+          countdownP.textContent = 'Exam in progress...';
+        }
+        div.appendChild(countdownP);
+        if (messageP.textContent) div.appendChild(messageP);
+        const portionDiv = document.createElement('div');
+        portionDiv.className = 'portions';
+        portionDiv.innerHTML = exam.portions;
+        div.appendChild(portionDiv);
+        div.addEventListener('click', function(e) {
+          e.stopPropagation();
+          document.querySelectorAll('.subject').forEach(subj => {
+            if(subj!==div) subj.classList.remove('open');
+          });
+          div.classList.toggle('open');
+        });
+        container.appendChild(div);
+      });
+      progressBar.style.width = (completed / exams.length * 100) + '%';
+      finishedText.style.display = completed === exams.length ? 'block' : 'none';
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  </script>
+</body>
+</html>
