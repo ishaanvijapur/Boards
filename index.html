@@ -67,6 +67,16 @@
       0 0 30px rgba(59,130,246,0.6); border-color: #1e3a8a;
       background: linear-gradient(135deg,#60a5fa 0%,#3b82f6 100%);
     }
+    .subject.completed {
+      background: linear-gradient(135deg, #27ae60 0%, #219a52 100%);
+      border-color: #1e7e34;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35), 0 0 20px rgba(39,174,96,0.4);
+    }
+    .subject.completed:hover {
+      transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.4),
+      0 0 30px rgba(39,174,96,0.6); border-color: #155724;
+      background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    }
     .subject.highlight {
       border: 3px solid #e74c3c; box-shadow: 0 0 30px rgba(231,76,60,0.5),
       0 8px 30px rgba(0,0,0,0.35); background: linear-gradient(135deg,#ffa07a 0%,#ff8c69 100%);
@@ -74,21 +84,28 @@
     .subject h2 {
       margin: 0 0 0.8rem 0; font-size: 1.6rem; font-weight: 700; color: #ffffff;
     }
+    .subject.completed h2 { color: #ffffff; }
     .exam-date { font-size: 1.1rem;color: #e0e7ff; margin-bottom: 0.6rem;font-weight: 600;}
+    .subject.completed .exam-date { color: #d4edda; }
     .countdown { font-size: 1.65rem; color: #fef08a; font-weight: 700; margin-bottom: 0.5rem;}
+    .subject.completed .countdown { color: #d4edda; }
     .message { font-size: 1.15rem;margin-top: 0.6rem;color: #86efac;font-weight: 700;}
+    .subject.completed .message { color: #d4edda; }
     .toggle-btn {
       background: #ffffff; color: #1e40af; border: none; padding: 0.6rem 1.2rem;
       border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
       transition: all 0.3s; margin-top: 0.8rem; display: block; margin: 0.8rem auto 0 auto;
     }
+    .subject.completed .toggle-btn { color: #155724; background: #d4edda; }
     .toggle-btn:hover { background: #f0f4f8; transform: scale(1.05); }
     .toggle-btn.open { background: #86efac; color: #1e40af; }
+    .subject.completed .toggle-btn.open { background: #c3e6cb; color: #155724; }
     .portions {
       margin-top: 1.2rem; padding: 1.2rem; background: #f0f4f8; border-left: 5px solid #3b82f6;
       color: #1e3a5f; font-size: 0.95rem; border-radius: 8px; max-height: 400px;
       overflow-y: auto; display: none; text-align: left; line-height: 1.7;
     }
+    .subject.completed .portions { border-left-color: #27ae60; background: #d4edda; }
     .section-header {
       font-weight: 700; color: #1e40af; margin: 15px 0 8px 0; padding: 8px 0;
       border-bottom: 2px solid #e0e7ff; display: flex; justify-content: space-between; align-items: center;
@@ -104,6 +121,7 @@
     .checkbox-list input[type="checkbox"] {
       accent-color: #2563eb; width: 20px; height: 20px; margin-right: 10px;
     }
+    .subject.completed .checkbox-list input[type="checkbox"] { accent-color: #27ae60; }
     .checkbox-list input[type="checkbox"]:checked + label {
       text-decoration: line-through; color: #b1b7be; opacity: 0.7;
     }
@@ -152,7 +170,7 @@ const exams = [
         "Real Numbers","Polynomials","Pair Of Linear Equations In Two Variables",
         "Quadratic Equations","Arithmetic Progressions","Triangles","Coordinate Geometry",
         "Introduction To Trigonometry","Applications Of Trigonometry",
-        "Circles","Constructions","Areas Related To Circles","Surface Areas And Volumes",
+        "Circles","Areas Related To Circles","Surface Areas And Volumes",
         "Statistics and Probability"
       ]}
     ]
@@ -163,8 +181,7 @@ const exams = [
       { name: "First Flight (Prose)", chapters: [
         "A Letter to God","Nelson Mandela: Long Walk to Freedom",
         "Two Stories about Flying (His First Flight & Black Aeroplane)",
-        "From the Diary of Anne Frank","The Hundred Dresses – I",
-        "The Hundred Dresses – II","Glimpses of India (A Baker from Goa, Coorg, Tea from Assam)",
+        "From the Diary of Anne Frank","Glimpses of India (A Baker from Goa, Coorg, Tea from Assam)",
         "Mijbil the Otter","Madam Rides the Bus",
         "The Sermon at Benares","The Proposal (Play)"
       ]},
@@ -178,19 +195,24 @@ const exams = [
         "A Triumph of Surgery","The Thief's Story","The Midnight Visitor",
         "A Question of Trust","Footprints without Feet",
         "The Making of a Scientist","The Necklace",
-        "The Hack Driver","Bholi","The Book that Saved the Earth"
+        "Bholi","The Book that Saved the Earth"
       ]}
     ]
   },
   {
     subject: "Science [086]", date: "2026-02-25",
     sections: [
-      { name: "Chapters", chapters: [
+      { name: "Chemistry", chapters: [
         "Chemical Reactions and Equations", "Acids, Bases, and Salts", "Metals and Non-metals",
-        "Carbon and its Compounds", "Periodic Classification of Elements","Life Processes",
-        "Control and Coordination","How do Organisms Reproduce","Heredity and Evolution",
+        "Carbon and its Compounds"
+      ]},
+      { name: "Biology", chapters: [
+        "Life Processes","Control and Coordination","How do Organisms Reproduce","Heredity",
+        "Our Environment"
+      ]},
+      { name: "Physics", chapters: [
         "Light — Reflection and Refraction","The Human Eye and the Colourful World","Electricity",
-        "Magnetic Effects of Electric Current","Sources of Energy","Our Environment","Management of Natural Resources"
+        "Magnetic Effects of Electric Current"
       ]}
     ]
   },
@@ -207,8 +229,8 @@ const exams = [
     subject: "Sanskrit [119]", date: "2026-02-28",
     sections: [
       { name: "साहित्यम्: मणिका (Literature)", chapters: [
-        "संवादः","सुभाषितानि","धर्मक्षेत्रे कुरुक्षेत्रे","मेघः अयम्","सौदामिनी",
-        "व्रजन्तु सुतराम् रम्याणि","अपेक्षा","हिमालयः","विशिष्ट: पथः","शिवा-संकल्प"
+        "Chapter 1","Chapter 2","Chapter 3","Chapter 4","Chapter 5",
+        "Chapter 6","Chapter 7","Chapter 8","Chapter 9","Chapter 10"
       ]},
       { name: "व्याकरण (Grammar)", chapters: [
         "संधि","समास","प्रत्यय","वाच्यप्रकरण","शब्दरूपाणि","धातुरूपाणि","अव्ययपदानि","अशुद्धि संशोधन"
@@ -269,6 +291,10 @@ function getStorageKey(subject, sectionIndex, chapterIndex) {
 
 function isSectionComplete(subject, sectionIndex, sectionChapters) {
   return sectionChapters.every((_, i) => localStorage.getItem(getStorageKey(subject, sectionIndex, i)) === "1");
+}
+
+function isSubjectComplete(exam) {
+  return exam.sections.every((section, secIdx) => isSectionComplete(exam.subject, secIdx, section.chapters));
 }
 
 function renderSections(subject, sections) {
@@ -334,7 +360,19 @@ function updateCountdown() {
     const dayBefore = new Date(start.getTime() - 24*60*60*1000);
     const div = document.createElement("div");
     div.classList.add("subject");
-    if (now >= dayBefore && now < start) div.classList.add("highlight");
+    const subjectComplete = isSubjectComplete(exam);
+    if (subjectComplete) {
+      div.classList.add("completed");
+      const completeBadge = document.createElement("div");
+      completeBadge.textContent = "Completed";
+      completeBadge.style.color = "#d4edda";
+      completeBadge.style.fontSize = "1.2rem";
+      completeBadge.style.fontWeight = "700";
+      completeBadge.style.marginTop = "0.5rem";
+      div.appendChild(completeBadge);
+    } else if (now >= dayBefore && now < start) {
+      div.classList.add("highlight");
+    }
     const title = document.createElement("h2");
     title.textContent = exam.subject;
     div.appendChild(title);
@@ -346,7 +384,9 @@ function updateCountdown() {
     countdownP.className = "countdown";
     const messageP = document.createElement("div");
     messageP.className = "message";
-    if (now >= dayBefore && now < start) {
+    if (subjectComplete) {
+      messageP.textContent = "Well done!";
+    } else if (now >= dayBefore && now < start) {
       const subjectName = exam.subject.split(" ")[0];
       messageP.textContent = `All the best for ${subjectName}!`;
     } else if (now < start) {
@@ -384,7 +424,7 @@ function updateCountdown() {
     portionDiv.className = "portions";
     portionDiv.innerHTML = `<b>Chapters/Topics:</b>` + renderSections(exam.subject, exam.sections);
 
-    // Checkbox logic: save on change, update section visuals
+    // Checkbox logic: save on change, update section visuals and subject completion
     setTimeout(() => {
       function attachListeners(examDiv, exam) {
         exam.sections.forEach((section, secIdx) => {
@@ -398,6 +438,10 @@ function updateCountdown() {
               portionDiv.innerHTML = `<b>Chapters/Topics:</b>` + renderSections(exam.subject, exam.sections);
               // Re-attach listeners
               setTimeout(() => attachListeners(examDiv, exam), 10);
+              // Check if subject is now complete and update UI
+              if (isSubjectComplete(exam)) {
+                updateCountdown(); // Full refresh to apply completed class
+              }
             });
           });
         });
