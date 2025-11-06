@@ -8,7 +8,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
     body {
-      background: linear-gradient(45deg, #22223b, #3a3a50 100%);
+      background: linear-gradient(135deg, #0f3460, #1b6e8f, #2a9bb8, #16a085);
       color: #eee;
       font-family: 'Roboto Mono', monospace;
       min-height: 100vh;
@@ -17,21 +17,33 @@
       align-items: center;
       padding: 2rem 1rem;
     }
-    h1 { font-size: 2.2rem; text-shadow: 0 0 6px #07f9b0aa; margin-bottom: 1.3rem; }
-    #examList { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 1.1rem; }
+    h1 {
+      font-size: 2.2rem;
+      text-shadow: 0 0 6px #00d4ffaa;
+      margin-bottom: 1.3rem;
+      text-align: center;
+    }
+    #examList {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
     .subject {
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.08);
       border-radius: 14px;
       padding: 18px 25px;
-      box-shadow: 0 0 10px #00ffa588;
+      box-shadow: 0 0 10px #00d4ff55;
       cursor: pointer;
       position: relative;
       transition: transform 0.2s, box-shadow 0.2s;
       overflow: hidden;
+      text-align: center;
     }
     .subject.highlight {
-      border: 2px solid #07f9b0;
-      box-shadow: 0 0 18px #07f9b088;
+      border: 2px solid #00d4ff;
+      box-shadow: 0 0 18px #00d4ff88;
       transform: scale(1.04);
       z-index: 3;
     }
@@ -57,19 +69,21 @@
     }
     .portions {
       margin-top: 12px;
-      padding: 15px 12px 0 0;
+      padding: 15px 12px 0 12px;
       background: rgba(0,0,0,0.18);
-      border-left: 4px solid #07f9b0;
+      border-left: 4px solid #00d4ff;
       color: #fff;
       font-size: 1rem;
       box-shadow: 0 6px 12px #040e0999;
-      border-radius: 0 8px 8px 0;
+      border-radius: 8px;
       max-height: 380px;
       overflow-y: auto;
       display: none;
       text-align: left;
     }
-    .subject.open .portions { display: block; }
+    .subject.open .portions {
+      display: block;
+    }
     #progressContainer {
       margin-top: 2.5rem;
       width: 100%;
@@ -79,16 +93,16 @@
       height: 30px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 0 10px #00ffa588 inset;
+      box-shadow: 0 0 10px #00d4ff55 inset;
     }
     #progressBar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(270deg, #00ffa5, #00ffdd, #00ffa5);
+      background: linear-gradient(270deg, #00d4ff, #00ffff, #00d4ff);
       background-size: 400% 100%;
       animation: pulseGradient 4s ease infinite;
       border-radius: 18px 0 0 18px;
-      box-shadow: 0 0 10px #00ffccaa;
+      box-shadow: 0 0 10px #00ffffaa;
       transition: width 0.7s;
     }
     @keyframes pulseGradient {
@@ -99,24 +113,30 @@
     #finished {
       margin-top: 3rem;
       font-size: 1.5rem;
-      color: #07f9b0;
-      text-shadow: 0 0 15px #07f9b0bb;
+      color: #00d4ff;
+      text-shadow: 0 0 15px #00d4ffbb;
       display: none;
     }
     @media (max-width: 480px) {
-      .subject { padding: 14px 10px; }
-      .portions { font-size: .9rem; }
-      h1 { font-size: 1.3rem; }
+      .subject {
+        padding: 14px 10px;
+      }
+      .portions {
+        font-size: .9rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>📘 Class 10 Board Exam Countdown</h1>
+  <h1>Class 10 Board Exams 2026</h1>
   <div id="examList"></div>
   <div id="progressContainer">
     <div id="progressBar"></div>
   </div>
-  <div id="finished">✅ All exams completed! Well done, Soldier!</div>
+  <div id="finished">All exams completed! Well done!</div>
   <script>
     const exams = [
       { subject: "Mathematics (041)", code:"041", date: "2026-02-17", portions: `
@@ -143,9 +163,9 @@
       { subject: "Science (086)", code:"086", date: "2026-02-25", portions: `
         <b>Portions:</b>
         <ul>
-          <li>Chemicstry: Chemical Reactions, Acids & Bases, Metals & Non-metals, Carbon and its Compounds</li>
-          <li>Biology: Life Processes, Control & Coordination, Reproduction, Heredity, Environment</li>
-          <li>Physics: Light (Reflection & Refraction), Human Eye, Electricity, Magnetic Effect</li>
+          <li>Chemical Substances: Chemical Reactions, Acids & Bases, Metals & Non-metals, Carbon and its Compounds</li>
+          <li>World of Living: Life Processes, Control & Coordination, Reproduction, Heredity, Environment</li>
+          <li>Natural Phenomena: Light (Reflection & Refraction), Human Eye, Electricity, Magnetic Effect</li>
         </ul>
       `},
       { subject: "Artificial Intelligence (417)", code:"417", date: "2026-02-27", portions: `
@@ -220,7 +240,7 @@
         const div = document.createElement('div');
         div.classList.add('subject');
 
-        // Highlight ONLY 1 day before exam
+        // Highlight ONLY 1 day before exam (from 24 hours before start time)
         if (now >= dayBefore && now < start) {
           div.classList.add('highlight');
         }
@@ -241,13 +261,13 @@
         messageP.className = 'message';
 
         if (now >= dayBefore && now < start) {
-          messageP.textContent = `🌟 All the best for ${exam.subject.split('(')[0].trim()}!`;
+          messageP.textContent = `All the best for ${exam.subject.split('(')[0].trim()}!`;
         } else if (now < dayBefore) {
           const diff = start-now;
           const {days, hours, minutes} = formatTime(diff);
-          countdownP.textContent = `⏳ ${days} days, ${hours} hours, ${minutes} minutes left`;
+          countdownP.textContent = `${days} days, ${hours} hours, ${minutes} minutes left`;
         } else if (now >= start && now <= end) {
-          countdownP.textContent = '⏳ Exam in progress...';
+          countdownP.textContent = 'Exam in progress...';
         }
 
         div.appendChild(countdownP);
@@ -258,7 +278,7 @@
         portionDiv.innerHTML = exam.portions;
         div.appendChild(portionDiv);
 
-        // Always allow clicking to open/close portions, even outside highlight window
+        // Always allow clicking to open/close portions
         div.addEventListener('click', function(e){
           e.stopPropagation();
           document.querySelectorAll('.subject').forEach(subj=>{
