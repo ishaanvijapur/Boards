@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 10 Boards Countdown</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #001f3f, #0074D9);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .subject {
+      background: rgba(255,255,255,0.15);
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 500px;
+    }
+    .subject h2 {
+      font-size: 1.5rem;
+      margin: 0 0 0.5rem;
+    }
+    .countdown {
+      font-size: 1.2rem;
+      margin: 0.3rem 0;
+    }
+    .message {
+      font-weight: bold;
+      color: #ffdf00;
+    }
+    #finishedMessage {
+      margin-top: 2rem;
+      font-size: 1.8rem;
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class 10 Board Exam Countdown</h1>
+
+  <div id="subjectsContainer">
+    <div class="subject" data-date="2026-02-17" data-name="Maths"></div>
+    <div class="subject" data-date="2026-02-21" data-name="English"></div>
+    <div class="subject" data-date="2026-02-25" data-name="Science"></div>
+    <div class="subject" data-date="2026-02-27" data-name="Artificial Intelligence"></div>
+    <div class="subject" data-date="2026-02-28" data-name="Sanskrit"></div>
+    <div class="subject" data-date="2026-03-07" data-name="Social Science"></div>
+  </div>
+
+  <div id="finishedMessage" style="display:none;">
+    ✅ All exams completed! Best of luck for your results!
+  </div>
+
+  <script>
+    function createExamHTML(name, start, end) {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <h2>${name}</h2>
+        <p class="countdown"></p>
+        <p class="message"></p>
+      `;
+      div.querySelector(".countdown").setAttribute("data-start", start);
+      div.querySelector(".countdown").setAttribute("data-end", end);
+      return div;
+    }
+
+    function updateCountdown() {
+      const subjects = document.querySelectorAll(".subject");
+      let anyActive = false;
+      const now = new Date();
+
+      subjects.forEach(subject => {
+        const name = subject.getAttribute("data-name");
+        const dateStr = subject.getAttribute("data-date");
+        const startTime = new Date(dateStr + "T10:30:00");
+        const endTime = new Date(dateStr + "T13:30:00");
+        const oneDayBefore = new Date(startTime.getTime() - (24 * 60 * 60 * 1000));
+
+        const countdownEl = subject.querySelector(".countdown");
+        const messageEl = subject.querySelector(".message");
+
+        if (now >= endTime) {
+          subject.style.display = "none";
+          return;
+        }
+
+        if (now >= oneDayBefore && now < startTime) {
+          messageEl.textContent = `🌟 All the best for ${name}!`;
+          countdownEl.textContent = "";
+          anyActive = true;
+          return;
+        }
+
+        if (now < oneDayBefore) {
+          const diff = startTime - now;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          countdownEl.textContent = `⏳ ${days} days, ${hours}h ${minutes}m left`;
+          messageEl.textContent = "";
+          anyActive = true;
+        }
+      });
+
+      if (!anyActive) {
+        document.getElementById("finishedMessage").style.display = "block";
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
