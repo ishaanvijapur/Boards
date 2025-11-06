@@ -1,142 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class 10 Board Exam Countdown</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
-      text-align: center;
-      padding: 30px;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-    .subject {
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      margin: 15px auto;
-      padding: 15px;
-      max-width: 500px;
-      transition: all 0.3s ease;
-    }
-    .subject h2 {
-      margin: 0;
-      font-size: 1.5em;
-    }
-    .countdown {
-      margin-top: 5px;
-      font-size: 1.1em;
-    }
-    .message {
-      color: #ffdf00;
-      font-weight: bold;
-      margin-top: 5px;
-    }
-    #progressContainer {
-      margin: 30px auto;
-      max-width: 500px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 15px;
-      overflow: hidden;
-      height: 30px;
-    }
-    #progressBar {
-      height: 100%;
-      width: 0%;
-      background: #00ff88;
-      transition: width 0.5s ease;
-    }
-    #finished {
-      margin-top: 40px;
-      font-size: 1.8em;
-      color: #00ff88;
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 10 Board Exam Countdown</title>
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  text-align: center;
+  padding: 30px;
+}
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+.subject {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  margin: 15px auto;
+  padding: 15px;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+.subject h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+.countdown {
+  margin-top: 5px;
+  font-size: 1.1em;
+}
+.message {
+  color: #ffdf00;
+  font-weight: bold;
+  margin-top: 5px;
+}
+#progressContainer {
+  margin: 30px auto;
+  max-width: 500px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  height: 30px;
+}
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #00ff88;
+  transition: width 0.5s ease;
+}
+#finished {
+  margin-top: 40px;
+  font-size: 1.8em;
+  color: #00ff88;
+  display: none;
+}
+</style>
 </head>
 <body>
-  <h1>📘 Class 10 Board Exam Countdown</h1>
+<h1>📘 Class 10 Board Exam Countdown</h1>
+<div id="examList"></div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<div id="finished">✅ All exams completed! Well done, Soldier!</div>
 
-  <div id="examList"></div>
+<script>
+const exams = [
+  { subject: "Maths", date: "2026-02-17T10:30:00+05:30" },
+  { subject: "English", date: "2026-02-21T10:30:00+05:30" },
+  { subject: "Science", date: "2026-02-25T10:30:00+05:30" },
+  { subject: "Artificial Intelligence", date: "2026-02-27T10:30:00+05:30" },
+  { subject: "Sanskrit", date: "2026-02-28T10:30:00+05:30" },
+  { subject: "Social Science", date: "2026-03-07T10:30:00+05:30" }
+];
 
-  <div id="progressContainer">
-    <div id="progressBar"></div>
-  </div>
+const container = document.getElementById("examList");
+const progressBar = document.getElementById("progressBar");
+const finished = document.getElementById("finished");
 
-  <div id="finished">✅ All exams completed! Well done, Soldier!</div>
+function updateCountdown() {
+  container.innerHTML = "";
+  const now = new Date();
+  let completed = 0;
 
-  <script>
-    const exams = [
-      { subject: "Maths", date: "2026-02-17" },
-      { subject: "English", date: "2026-02-21" },
-      { subject: "Science", date: "2026-02-25" },
-      { subject: "Artificial Intelligence", date: "2026-02-27" },
-      { subject: "Sanskrit", date: "2026-02-28" },
-      { subject: "Social Science", date: "2026-03-07" },
-    ];
+  exams.forEach(exam => {
+    const start = new Date(exam.date);
+    const end = new Date(start.getTime() + 3*60*60*1000); // 1:30 PM
+    const dayBefore = new Date(start.getTime() - 24*60*60*1000);
 
-    const container = document.getElementById("examList");
-    const progressBar = document.getElementById("progressBar");
-    const finished = document.getElementById("finished");
-
-    function updateCountdown() {
-      container.innerHTML = "";
-      const now = new Date();
-      let completed = 0;
-
-      exams.forEach(exam => {
-        const start = new Date(`${exam.date}T10:30:00`);
-        const end = new Date(`${exam.date}T13:30:00`);
-        const dayBefore = new Date(start.getTime() - 24*60*60*1000);
-
-        if(now > end) {
-          completed++;
-          return; // skip past exams
-        }
-
-        const div = document.createElement("div");
-        div.className = "subject";
-        div.innerHTML = `<h2>${exam.subject}</h2>`;
-
-        const countdown = document.createElement("p");
-        countdown.className = "countdown";
-
-        const message = document.createElement("p");
-        message.className = "message";
-
-        if(now >= dayBefore && now < start) {
-          message.textContent = `🌟 All the best for ${exam.subject}!`;
-        } else if(now < dayBefore) {
-          const diff = start - now;
-          const days = Math.floor(diff / (1000*60*60*24));
-          const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-          const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-          countdown.textContent = `⏳ ${days} days, ${hours} hours, ${minutes} minutes left`;
-        }
-
-        div.appendChild(countdown);
-        div.appendChild(message);
-        container.appendChild(div);
-      });
-
-      // Update progress bar
-      const progressPercent = (completed / exams.length) * 100;
-      progressBar.style.width = progressPercent + "%";
-
-      if(completed === exams.length) {
-        finished.style.display = "block";
-      } else {
-        finished.style.display = "none";
-      }
+    if(now > end) {
+      completed++;
+      return;
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 60000); // update every minute
-  </script>
+    const div = document.createElement("div");
+    div.className = "subject";
+    div.innerHTML = `<h2>${exam.subject}</h2>`;
+
+    const countdown = document.createElement("p");
+    countdown.className = "countdown";
+
+    const message = document.createElement("p");
+    message.className = "message";
+
+    if(now >= dayBefore && now < start) {
+      message.textContent = `🌟 All the best for ${exam.subject}!`;
+    } else if(now < dayBefore) {
+      const diff = start - now;
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+      countdown.textContent = `⏳ ${days} days, ${hours} hours, ${minutes} minutes left`;
+    }
+
+    div.appendChild(countdown);
+    div.appendChild(message);
+    container.appendChild(div);
+  });
+
+  const progressPercent = (completed / exams.length) * 100;
+  progressBar.style.width = progressPercent + "%";
+
+  finished.style.display = completed === exams.length ? "block" : "none";
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000);
+</script>
 </body>
 </html>
