@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Class 10 Board Exams 2026</title>
+  <title>Class X Boards 2026</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
     body {
-      background: linear-gradient(135deg, #0f3460, #1b6e8f, #2a9bb8, #16a085);
-      color: #eee;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-attachment: fixed;
+      color: #fff;
       font-family: 'Roboto Mono', monospace;
       min-height: 100vh;
       display: flex;
@@ -19,9 +20,10 @@
     }
     h1 {
       font-size: 2.2rem;
-      text-shadow: 0 0 6px #00d4ffaa;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
       margin-bottom: 1.3rem;
       text-align: center;
+      letter-spacing: 1px;
     }
     #examList {
       width: 100%;
@@ -31,55 +33,74 @@
       gap: 1.1rem;
     }
     .subject {
-      background: rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 18px 25px;
-      box-shadow: 0 0 10px #00d4ff55;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       cursor: pointer;
       position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.3s ease;
       overflow: hidden;
       text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .subject:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
     .subject.highlight {
-      border: 2px solid #00d4ff;
-      box-shadow: 0 0 18px #00d4ff88;
-      transform: scale(1.04);
+      border: 2px solid #00f2fe;
+      box-shadow: 0 0 20px rgba(0,242,254,0.6), inset 0 0 20px rgba(0,242,254,0.2);
+      background: rgba(0,242,254,0.15);
+      transform: scale(1.05);
       z-index: 3;
     }
     .subject h2 {
-      margin: 0 0 0.2em 0;
-      font-size: 1.2rem;
+      margin: 0 0 0.3em 0;
+      font-size: 1.3rem;
+      font-weight: 700;
     }
     .exam-date {
-      font-size: 1.08rem;
-      color: #ffe066;
-      margin-bottom: .25em;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.3em;
+      font-weight: 500;
     }
     .countdown {
-      font-size: 1.05rem;
-      color: #a5d6a7;
+      font-size: 1rem;
+      color: #e0f7fa;
+      font-weight: 500;
+      margin: 0.2em 0;
     }
     .message {
-      font-size: 1.08rem;
-      margin-top: 4px;
-      color: #ffd600;
+      font-size: 1.05rem;
+      margin-top: 0.5em;
+      color: #ffd700;
       font-weight: 700;
-      text-shadow: 0 0 8px #ffd60088;
+      text-shadow: 0 0 8px rgba(255,215,0,0.5);
     }
     .portions {
-      margin-top: 12px;
+      margin-top: 15px;
       padding: 15px 12px 0 12px;
-      background: rgba(0,0,0,0.18);
-      border-left: 4px solid #00d4ff;
+      background: rgba(0,0,0,0.2);
+      border-left: 4px solid #00f2fe;
       color: #fff;
-      font-size: 1rem;
-      box-shadow: 0 6px 12px #040e0999;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
       border-radius: 8px;
       max-height: 380px;
       overflow-y: auto;
       display: none;
       text-align: left;
+    }
+    .portions ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+    .portions li {
+      margin: 6px 0;
+      line-height: 1.5;
     }
     .subject.open .portions {
       display: block;
@@ -88,121 +109,60 @@
       margin-top: 2.5rem;
       width: 100%;
       max-width: 600px;
-      background: rgba(255,255,255,0.14);
-      border-radius: 18px;
-      height: 30px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      height: 32px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 0 10px #00d4ff55 inset;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     #progressBar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(270deg, #00d4ff, #00ffff, #00d4ff);
-      background-size: 400% 100%;
-      animation: pulseGradient 4s ease infinite;
-      border-radius: 18px 0 0 18px;
-      box-shadow: 0 0 10px #00ffffaa;
-      transition: width 0.7s;
+      background: linear-gradient(90deg, #00f2fe, #4facfe, #667eea);
+      animation: shimmer 2s infinite;
+      border-radius: 20px 0 0 20px;
+      box-shadow: 0 0 15px rgba(0,242,254,0.8);
+      transition: width 0.8s ease;
     }
-    @keyframes pulseGradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    @keyframes shimmer {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
     }
     #finished {
       margin-top: 3rem;
-      font-size: 1.5rem;
-      color: #00d4ff;
-      text-shadow: 0 0 15px #00d4ffbb;
+      font-size: 1.8rem;
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255,215,0,0.6);
       display: none;
-    }
-    @media (max-width: 480px) {
-      .subject {
-        padding: 14px 10px;
-      }
-      .portions {
-        font-size: .9rem;
-      }
-      h1 {
-        font-size: 1.3rem;
-      }
+      font-weight: 800;
+      letter-spacing: 1px;
     }
   </style>
 </head>
 <body>
-  <h1>Class 10 Board Exams 2026</h1>
+  <h1>Class X Boards 2026</h1>
   <div id="examList"></div>
   <div id="progressContainer">
     <div id="progressBar"></div>
   </div>
-  <div id="finished">All exams completed! Well done!</div>
+  <div id="finished">All exams completed! Well done, Champion!</div>
   <script>
     const exams = [
-      { subject: "Mathematics (041)", code:"041", date: "2026-02-17", portions: `
-        <b>Portions:</b>
-        <ul>
-          <li>Real Numbers, Polynomials</li>
-          <li>Pair Of Linear Equations, Quatratic Equations</li>
-          <li>Coordinate Geometry, Triangles</li>
-          <li>Circles, Areas related to circles</li>
-          <li>Intro to Trigonometry, Applications of Trigonometry</li>
-          <li>Arithmetic Progression, Surface areas & volumes</li>
-          <li>Statistics, Probability</li>
-        </ul>
-      `},
-      { subject: "English (184)", code:"184", date: "2026-02-21", portions: `
-        <b>Sections:</b>
-        <ul>
-          <li>Reading: Unseen passages</li>
-          <li>Writing & Grammar: Letter, Paragraph, Grammar Topics</li>
-          <li>Literature: Textbook chapters, poems, extracts</li>
-          <li>Supplementary: Stories, extracts, long answers</li>
-        </ul>
-      `},
-      { subject: "Science (086)", code:"086", date: "2026-02-25", portions: `
-        <b>Portions:</b>
-        <ul>
-          <li>Chemical Substances: Chemical Reactions, Acids & Bases, Metals & Non-metals, Carbon and its Compounds</li>
-          <li>World of Living: Life Processes, Control & Coordination, Reproduction, Heredity, Environment</li>
-          <li>Natural Phenomena: Light (Reflection & Refraction), Human Eye, Electricity, Magnetic Effect</li>
-        </ul>
-      `},
-      { subject: "Artificial Intelligence (417)", code:"417", date: "2026-02-27", portions: `
-        <b>Units:</b>
-        <ul>
-          <li>Employability Skills, AI Project Cycle, AI Domains</li>
-          <li>Ethics in AI, Modeling, Data Analysis</li>
-          <li>Computer Vision, Natural Language Processing, Python</li>
-        </ul>
-      `},
-      { subject: "Sanskrit (119)", code:"119", date: "2026-02-28", portions: `
-        <b>पुस्तकें एवं विषय:</b>
-        <ul>
-          <li>मणिका: सभी पाठ</li>
-          <li>व्याकरण: संधि, समास, उपसर्ग, प्रत्यय आदि</li>
-          <li>संवाद, पत्र, अनुच्छेद लेखन</li>
-        </ul>
-      `},
-      { subject: "Social Science (087)", code:"087", date: "2026-03-07", portions: `
-        <b>Units:</b>
-        <ul>
-          <li>History, Geography, Political Science</li>
-          <li>Economics, Practical Components</li>
-        </ul>
-      `},
+      { subject: "Mathematics [041]", date: "2026-02-17", portions: `<b>Portions:</b><ul><li>Real Numbers, Polynomials</li><li>Pair Of Linear Equations, Quatratic Equations</li><li>Coordinate Geometry, Triangles</li><li>Circles, Areas related to circles</li><li>Intro to Trigonometry, Applications of Trigonometry</li><li>Arithmetic Progression, Surface areas & volumes</li><li>Statistics, Probability</li></ul>` },
+      { subject: "English [184]", date: "2026-02-21", portions: `<b>Sections:</b><ul><li>Reading: Unseen passages</li><li>Writing & Grammar: Letter, Paragraph, Grammar Topics</li><li>Literature: Textbook chapters, poems, extracts</li><li>Supplementary: Stories, extracts, long answers</li></ul>` },
+      { subject: "Science [086]", date: "2026-02-25", portions: `<b>Portions:</b><ul><li>Chemical Substances: Chemical Reactions, Acids & Bases, Metals & Non-metals, Carbon and its Compounds</li><li>World of Living: Life Processes, Control & Coordination, Reproduction, Heredity, Environment</li><li>Natural Phenomena: Light (Reflection & Refraction), Human Eye, Electricity, Magnetic Effect</li></ul>` },
+      { subject: "Artificial Intelligence [417]", date: "2026-02-27", portions: `<b>Units:</b><ul><li>Employability Skills, AI Project Cycle, AI Domains</li><li>Ethics in AI, Modeling, Data Analysis</li><li>Computer Vision, Natural Language Processing, Python</li></ul>` },
+      { subject: "Sanskrit [119]", date: "2026-02-28", portions: `<b>पुस्तकें एवं विषय:</b><ul><li>मणिका: सभी पाठ</li><li>व्याकरण: संधि, समास, उपसर्ग, प्रत्यय आदि</li><li>संवाद, पत्र, अनुच्छेद लेखन</li></ul>` },
+      { subject: "Social Science [087]", date: "2026-03-07", portions: `<b>Units:</b><ul><li>History, Geography, Political Science</li><li>Economics, Practical Components</li></ul>` },
     ];
 
-    const months = [
-      'January','February','March','April','May','June','July','August','September',
-      'October','November','December'
-    ];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     function getDateStr(dateStr) {
       const d = new Date(dateStr + 'T10:30:00');
-      let dd = d.getDate();
-      let mm = months[d.getMonth()];
-      let yy = d.getFullYear();
+      let dd = d.getDate(), mm = months[d.getMonth()], yy = d.getFullYear();
       let suf = 'th';
       if (dd === 1 || dd === 21 || dd === 31) suf = 'st';
       else if (dd === 2 || dd === 22) suf = 'nd';
@@ -211,10 +171,11 @@
     }
 
     function formatTime(diff) {
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-      const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-      return {days, hours, minutes};
+      return {
+        days: Math.floor(diff / (1000*60*60*24)),
+        hours: Math.floor((diff % (1000*60*60*24)) / (1000*60*60)),
+        minutes: Math.floor((diff % (1000*60*60)) / (1000*60))
+      };
     }
 
     const container = document.getElementById('examList');
@@ -226,13 +187,10 @@
       const now = new Date();
       let completed = 0;
 
-      const active = exams.filter(exam => {
-        const end = new Date(`${exam.date}T13:30:00`);
-        return now <= end;
-      });
+      const active = exams.filter(exam => now <= new Date(`${exam.date}T13:30:00`));
       completed = exams.length - active.length;
 
-      active.forEach((exam, i) => {
+      active.forEach(exam => {
         const start = new Date(`${exam.date}T10:30:00`);
         const end = new Date(`${exam.date}T13:30:00`);
         const dayBefore = new Date(start.getTime() - 24*60*60*1000);
@@ -240,18 +198,18 @@
         const div = document.createElement('div');
         div.classList.add('subject');
 
-        // Highlight ONLY 1 day before exam (from 24 hours before start time)
+        // Highlight ONLY 24 hours before exam
         if (now >= dayBefore && now < start) {
           div.classList.add('highlight');
         }
 
         const title = document.createElement('h2');
-        title.innerHTML = `${exam.subject}`;
+        title.textContent = exam.subject;
         div.appendChild(title);
 
         const dateDiv = document.createElement('div');
         dateDiv.className = 'exam-date';
-        dateDiv.innerHTML = getDateStr(exam.date);
+        dateDiv.textContent = getDateStr(exam.date);
         div.appendChild(dateDiv);
 
         const countdownP = document.createElement('div');
@@ -261,11 +219,11 @@
         messageP.className = 'message';
 
         if (now >= dayBefore && now < start) {
-          messageP.textContent = `All the best for ${exam.subject.split('(')[0].trim()}!`;
+          const subjectName = exam.subject.split('[')[0].trim();
+          messageP.textContent = `All the best for ${subjectName}!`;
         } else if (now < dayBefore) {
-          const diff = start-now;
-          const {days, hours, minutes} = formatTime(diff);
-          countdownP.textContent = `${days} days, ${hours} hours, ${minutes} minutes left`;
+          const {days, hours, minutes} = formatTime(start - now);
+          countdownP.textContent = `${days}d ${hours}h ${minutes}m left`;
         } else if (now >= start && now <= end) {
           countdownP.textContent = 'Exam in progress...';
         }
@@ -278,21 +236,17 @@
         portionDiv.innerHTML = exam.portions;
         div.appendChild(portionDiv);
 
-        // Always allow clicking to open/close portions
         div.addEventListener('click', function(e){
           e.stopPropagation();
-          document.querySelectorAll('.subject').forEach(subj=>{
-            if(subj!==div) subj.classList.remove('open');
-          });
+          document.querySelectorAll('.subject').forEach(subj => subj !== div && subj.classList.remove('open'));
           div.classList.toggle('open');
         });
 
         container.appendChild(div);
       });
 
-      let percent = (completed / exams.length) * 100;
-      progressBar.style.width = percent + '%';
-      finishedText.style.display = (completed === exams.length) ? 'block' : 'none';
+      progressBar.style.width = (completed / exams.length) * 100 + '%';
+      finishedText.style.display = completed === exams.length ? 'block' : 'none';
     }
 
     updateCountdown();
