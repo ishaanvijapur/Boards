@@ -14,7 +14,7 @@
     }
     
     body {
-      background: linear-gradient(180deg, #f5f7fa 0%, #e8ecf1 100%);
+      background: linear-gradient(180deg, #ecf0f5 0%, #d5dce5 100%);
       color: #2c3e50;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
@@ -28,7 +28,7 @@
     
     h1 {
       font-size: 2rem;
-      color: #1a3a52;
+      color: #1e3a8a;
       margin-bottom: 0.5rem;
       text-align: center;
       font-weight: 700;
@@ -36,23 +36,23 @@
     
     .subtitle {
       font-size: 0.95rem;
-      color: #5a6c7d;
+      color: #475569;
       margin-bottom: 2rem;
       text-align: center;
       line-height: 1.5;
     }
     
     .subtitle a {
-      color: #2980b9;
+      color: #2563eb;
       text-decoration: none;
       font-weight: 600;
-      border-bottom: 2px solid #2980b9;
+      border-bottom: 2px solid #2563eb;
       transition: all 0.3s ease;
     }
     
     .subtitle a:hover {
-      color: #1a5fa0;
-      border-bottom-color: #1a5fa0;
+      color: #1e40af;
+      border-bottom-color: #1e40af;
     }
     
     #examList {
@@ -69,7 +69,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: all 0.3s ease;
-      border-left: 5px solid #2980b9;
+      border-left: 5px solid #2563eb;
     }
     
     .subject:hover {
@@ -78,28 +78,28 @@
     }
     
     .subject.highlight {
-      border-left-color: #27ae60;
-      background: #f0f8f4;
-      box-shadow: 0 4px 16px rgba(39, 174, 96, 0.2);
+      border-left-color: #059669;
+      background: #f0fdf4;
+      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.2);
     }
     
     .subject h2 {
       font-size: 1.3rem;
-      color: #1a3a52;
+      color: #1e3a8a;
       margin-bottom: 0.3rem;
       font-weight: 700;
     }
     
     .exam-date {
       font-size: 0.95rem;
-      color: #7f8c8d;
+      color: #64748b;
       margin-bottom: 0.5rem;
       font-weight: 500;
     }
     
     .countdown {
       font-size: 1rem;
-      color: #2980b9;
+      color: #2563eb;
       font-weight: 600;
       margin: 0.3rem 0;
     }
@@ -107,27 +107,28 @@
     .message {
       font-size: 1rem;
       margin-top: 0.5rem;
-      color: #27ae60;
+      color: #059669;
       font-weight: 700;
     }
     
     .portions {
       margin-top: 1rem;
       padding: 1rem;
-      background: #f8fafb;
-      border-left: 4px solid #2980b9;
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
       border-radius: 8px;
-      max-height: 400px;
+      max-height: 450px;
       overflow-y: auto;
       display: none;
       text-align: left;
     }
     
     .portions b {
-      color: #1a3a52;
+      color: #1e3a8a;
       font-weight: 700;
       display: block;
       margin-bottom: 0.5rem;
+      font-size: 0.95rem;
     }
     
     .portions ul {
@@ -137,17 +138,17 @@
     }
     
     .portions li {
-      color: #2c3e50;
-      margin: 0.6rem 0;
+      color: #334155;
+      margin: 0.5rem 0;
       padding-left: 1.5rem;
       position: relative;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.5;
     }
     
     .portions li:before {
       content: "•";
-      color: #2980b9;
+      color: #2563eb;
       font-weight: bold;
       position: absolute;
       left: 0;
@@ -169,7 +170,7 @@
     #progressBar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #2980b9, #3498db);
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
       transition: width 0.8s ease;
       border-radius: 12px;
     }
@@ -177,7 +178,7 @@
     #finished {
       margin-top: 2rem;
       font-size: 1.5rem;
-      color: #27ae60;
+      color: #059669;
       text-align: center;
       display: none;
       font-weight: 700;
@@ -191,7 +192,7 @@
         padding: 1.2rem;
       }
       .portions {
-        max-height: 300px;
+        max-height: 350px;
       }
     }
   </style>
@@ -215,7 +216,7 @@
       { 
         subject: "English [184]", 
         date: "2026-02-21", 
-        portions: "<b>Sections:</b><ul><li>Reading: Unseen passages</li><li>Writing & Grammar: Letter, Paragraph, Grammar Topics</li><li>Literature: Textbook chapters, poems, extracts</li><li>Supplementary: Stories, extracts, long answers</li></ul>" 
+        portions: "<b>Textbooks & Sections:</b><ul><li><strong>First Flight:</strong> The Letter Writing, Extracts & Long Questions</li><li><strong>Footprints Without Feet:</strong> All Stories & Extracts</li><li><strong>Reading Skills:</strong> Unseen Comprehension Passages</li><li><strong>Writing Section:</strong> Letter Writing, Descriptive Paragraph, Story Writing</li><li><strong>Grammar:</strong> Tenses, Editing, Omission, Rearrangement</li></ul>" 
       },
       { 
         subject: "Science [086]", 
@@ -235,7 +236,7 @@
       { 
         subject: "Social Science [087]", 
         date: "2026-03-07", 
-        portions: "<b>Sections:</b><ul><li>History: Nationalism, Globalisation</li><li>Geography: Resources, Agriculture, Industries</li><li>Political Science: Democracy, Rights, Constitution</li><li>Economics: Development, Money, Globalisation</li></ul>" 
+        portions: "<b>History:</b><ul><li>The Rise of Nationalism in Europe</li><li>Nationalism in India</li><li>Making of a Global World</li><li>Print Culture and Modern World</li></ul><b>Geography:</b><ul><li>Resources and Development</li><li>Forest and Wildlife Resources</li><li>Water Resources</li><li>Agriculture</li><li>Minerals and Energy Resources</li><li>Manufacturing Industries</li><li>Lifelines of National Economy</li></ul><b>Political Science:</b><ul><li>Power Sharing</li><li>Federalism</li><li>Democratic Rights</li><li>Religion, Caste and Gender</li><li>Political Parties</li><li>Outcomes of Democracy</li></ul><b>Economics:</b><ul><li>Development</li><li>Sectors of the Indian Economy</li><li>Money and Credit</li><li>Globalisation and the Indian Economy</li></ul>" 
       }
     ];
 
@@ -314,23 +315,4 @@
         const portionDiv = document.createElement('div');
         portionDiv.className = 'portions';
         portionDiv.innerHTML = exam.portions;
-        div.appendChild(portionDiv);
-
-        div.addEventListener('click', function(e){
-          e.stopPropagation();
-          document.querySelectorAll('.subject').forEach(subj => subj !== div && subj.classList.remove('open'));
-          div.classList.toggle('open');
-        });
-
-        container.appendChild(div);
-      });
-
-      progressBar.style.width = (completed / exams.length) * 100 + '%';
-      finishedText.style.display = completed === exams.length ? 'block' : 'none';
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 60000);
-  </script>
-</body>
-</html>
+        div.appendChil
