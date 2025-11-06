@@ -12,7 +12,7 @@
       padding: 0;
     }
     body {
-      background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 50%, #95a5a6 100%);
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 50%, #1a252f 100%);
       min-height: 100vh;
       font-family: 'Inter', sans-serif;
       color: #2c3e50;
@@ -24,25 +24,25 @@
       text-align: center;
       margin-bottom: 0.5rem;
       letter-spacing: 1px;
-      color: #1a5276;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: #ecf0f1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .subtitle {
       font-size: 1.05rem;
       text-align: center;
       margin-bottom: 2rem;
-      color: #2c3e50;
+      color: #bdc3c7;
     }
     .subtitle a {
-      color: #1a5276;
+      color: #a8d8ea;
       text-decoration: none;
-      border-bottom: 2px solid #1a5276;
+      border-bottom: 2px solid #a8d8ea;
       transition: all 0.3s;
       font-weight: 600;
     }
     .subtitle a:hover {
-      color: #0d47a1;
-      border-bottom-color: #0d47a1;
+      color: #ecf0f1;
+      border-bottom-color: #ecf0f1;
     }
     #examList {
       width: 100%;
@@ -60,6 +60,7 @@
       cursor: pointer;
       transition: all 0.3s;
       border: 2px solid #d1d5db;
+      text-align: center;
     }
     .subject:hover {
       transform: translateY(-4px);
@@ -85,9 +86,9 @@
       font-weight: 600;
     }
     .countdown {
-      font-size: 1.1rem;
+      font-size: 1.65rem;
       color: #c0392b;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 0.5rem;
     }
     .message {
@@ -169,6 +170,7 @@
       #examList {gap: 1rem;}
       .subject {padding: 1.3rem;}
       .subject h2 {font-size: 1.3rem;}
+      .countdown {font-size: 1.3rem;}
       .portions {font-size: 0.85rem; max-height: 250px;}
     }
   </style>
@@ -371,7 +373,7 @@
       else if (day === 2 || day === 22) suffix = "nd";
       else if (day === 3 || day === 23) suffix = "rd";
       
-      return `${day}${suffix} ${month} ${year} (10:30 AM)`;
+      return `${day}${suffix} ${month} ${year}`;
     }
     
     function formatTimediff(diff) {
