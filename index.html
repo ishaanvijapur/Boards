@@ -43,8 +43,8 @@
     .subject {
       background: linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
       border-radius: 12px; padding: 1.8rem; box-shadow: 0 8px 30px rgba(0,0,0,0.35),
-      0 0 20px rgba(59,130,246,0.4); cursor: pointer; transition: all 0.3s;
-      border: 2px solid #1e40af; text-align: center;
+      0 0 20px rgba(59,130,246,0.4); transition: all 0.3s; border: 2px solid #1e40af;
+      text-align: center;
     }
     .subject:hover {
       transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.4),
@@ -61,6 +61,13 @@
     .exam-date { font-size: 1.1rem;color: #e0e7ff; margin-bottom: 0.6rem;font-weight: 600;}
     .countdown { font-size: 1.65rem; color: #fef08a; font-weight: 700; margin-bottom: 0.5rem;}
     .message { font-size: 1.15rem;margin-top: 0.6rem;color: #86efac;font-weight: 700;}
+    .toggle-btn {
+      background: #ffffff; color: #1e40af; border: none; padding: 0.6rem 1.2rem;
+      border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      transition: all 0.3s; margin-top: 0.8rem; display: block; margin: 0.8rem auto 0 auto;
+    }
+    .toggle-btn:hover { background: #f0f4f8; transform: scale(1.05); }
+    .toggle-btn.open { background: #86efac; color: #1e40af; }
     .portions {
       margin-top: 1.2rem; padding: 1.2rem; background: #f0f4f8; border-left: 5px solid #3b82f6;
       color: #1e3a5f; font-size: 0.95rem; border-radius: 8px; max-height: 400px;
@@ -68,23 +75,16 @@
     }
     .checkbox-list { list-style: none; padding-left: 0; margin: 8px 0; }
     .checkbox-list li {
-      margin: 10px 0;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin: 10px 0; font-size: 1rem; display: flex; align-items: center; gap: 8px;
     }
     .checkbox-list input[type="checkbox"] {
-      accent-color: #2563eb;
-      width: 20px; height: 20px; margin-right: 10px;
+      accent-color: #2563eb; width: 20px; height: 20px; margin-right: 10px;
     }
     .checkbox-list input[type="checkbox"]:checked + label {
-      text-decoration: line-through;
-      color: #b1b7be;
-      opacity: 0.7;
+      text-decoration: line-through; color: #b1b7be; opacity: 0.7;
     }
-    .portions b { color: #1e40af; font-weight: 700;}
-    .subject.open .portions { display: block; animation: slideDown 0.3s ease;}
+    .portions b { color: #1e40af; font-weight: 700; }
+    .portions.open { display: block; animation: slideDown 0.3s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-10px);} to { opacity: 1; transform: translateY(0);}}
     #progressContainer {margin:2.5rem auto 0 auto;width:100%;max-width:720px;background:#ecf0f1;
       border-radius:12px;height:36px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.2);
@@ -97,6 +97,7 @@
     @media (max-width:600px){
       h1{font-size:1.8rem;}.subtitle{font-size:0.95rem;}#examList{gap:1rem;}.subject{padding:1.3rem;}
       .subject h2{font-size:1.3rem;}.countdown{font-size:1.3rem;}.portions{font-size:0.85rem;max-height:250px;}
+      .toggle-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -195,8 +196,7 @@ function formatTimediff(diff) {
   const days = Math.floor(diff/(1000*60*60*24));
   const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
   const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
-  const seconds = Math.floor((diff%(1000*60))/1000);
-  return {days, hours, minutes, seconds};
+  return {days, hours, minutes};
 }
 function getStorageKey(subject, i) {
   return `boards_ch_${subject.replace(/[^a-zA-Z0-9]/g,"_")}_${i}`;
@@ -248,13 +248,33 @@ function updateCountdown() {
       const subjectName = exam.subject.split(" ")[0];
       messageP.textContent = `All the best for ${subjectName}!`;
     } else if (now < start) {
-      const {days, hours, minutes, seconds} = formatTimediff(start - now);
-      countdownP.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+      const {days, hours, minutes} = formatTimediff(start - now);
+      countdownP.textContent = `${days}d ${hours}h ${minutes}m left`;
     } else if (now >= start && now < end) {
       countdownP.textContent = "Exam in progress...";
     }
     div.appendChild(countdownP);
     div.appendChild(messageP);
+
+    // Toggle button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "toggle-btn";
+    toggleBtn.textContent = "View Chapters";
+    toggleBtn.onclick = function(e) {
+      e.stopPropagation();
+      const portions = div.querySelector(".portions");
+      const isOpen = portions.classList.contains("open");
+      if (isOpen) {
+        portions.classList.remove("open");
+        toggleBtn.textContent = "View Chapters";
+        toggleBtn.classList.remove("open");
+      } else {
+        portions.classList.add("open");
+        toggleBtn.textContent = "Hide Chapters";
+        toggleBtn.classList.add("open");
+      }
+    };
+    div.appendChild(toggleBtn);
 
     // Tickable list area
     const portionDiv = document.createElement("div");
@@ -274,20 +294,13 @@ function updateCountdown() {
     },0);
 
     div.appendChild(portionDiv);
-    div.addEventListener("click", function(e){
-      e.stopPropagation();
-      document.querySelectorAll(".subject").forEach(subj => {
-        if(subj !== div) subj.classList.remove("open");
-      });
-      div.classList.toggle("open");
-    });
     container.appendChild(div);
   });
   progressBar.style.width = `${completed/exams.length*100}%`;
   finishedText.style.display = (completed === exams.length) ? "block" : "none";
 }
 updateCountdown();
-setInterval(updateCountdown, 1000); // every second, so if you reload/return, UI is always up to date
+setInterval(updateCountdown, 60000); // every minute for efficiency
 </script>
 </body>
 </html>
