@@ -1,132 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Class 10 Board Exam Countdown</title>
-<style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #ffffff;
-  text-align: center;
-  padding: 30px;
-}
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
-.subject {
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px;
-  margin: 15px auto;
-  padding: 15px;
-  max-width: 500px;
-  transition: all 0.3s ease;
-}
-.subject h2 {
-  margin: 0;
-  font-size: 1.5em;
-}
-.countdown {
-  margin-top: 5px;
-  font-size: 1.1em;
-}
-.message {
-  color: #ffdf00;
-  font-weight: bold;
-  margin-top: 5px;
-}
-#progressContainer {
-  margin: 30px auto;
-  max-width: 500px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 15px;
-  overflow: hidden;
-  height: 30px;
-}
-#progressBar {
-  height: 100%;
-  width: 0%;
-  background: #00ff88;
-  transition: width 0.5s ease;
-}
-#finished {
-  margin-top: 40px;
-  font-size: 1.8em;
-  color: #00ff88;
-  display: none;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class 10 Board Exam Countdown</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background: #121212;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 10px #00ffa5aa;
+      letter-spacing: 1px;
+    }
+    #examList {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .subject {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 18px 25px;
+      box-shadow: 0 0 8px #00ffa5aa;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .subject.next {
+      border: 2px solid #00ffa5;
+      box-shadow: 0 0 15px #00ffb377;
+      transform: scale(1.03);
+      z-index: 5;
+    }
+    .subject h2 {
+      margin: 0 0 6px 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+    .countdown {
+      font-size: 1.2rem;
+      color: #a5d6a7;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .message {
+      font-size: 1.15rem;
+      margin-top: 4px;
+      color: #ffd600;
+      font-weight: 700;
+      text-shadow: 0 0 6px #ffd600aa;
+    }
+    #progressContainer {
+      margin-top: 2.5rem;
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      height: 32px;
+      box-shadow: inset 0 0 10px #00000088;
+      overflow: hidden;
+      position: relative;
+    }
+    #progressBar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(270deg, #00ffa5, #00ffdd, #00ffa5);
+      background-size: 400% 100%;
+      animation: pulseGradient 4s ease infinite;
+      border-radius: 20px 0 0 20px;
+      transition: width 0.6s ease;
+      box-shadow: 0 0 12px #00ffccaa;
+    }
+    @keyframes pulseGradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    #finished {
+      margin-top: 3rem;
+      font-size: 2rem;
+      color: #00ffa5;
+      text-shadow: 0 0 15px #00ffa5cc;
+      font-weight: 800;
+      display: none;
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .subject h2 {
+        font-size: 1.3rem;
+      }
+      .countdown {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<h1>📘 Class 10 Board Exam Countdown</h1>
-<div id="examList"></div>
-<div id="progressContainer"><div id="progressBar"></div></div>
-<div id="finished">✅ All exams completed! Well done, Soldier!</div>
+  <h1>📘 Class 10 Board Exam Countdown</h1>
 
-<script>
-const exams = [
-  { subject: "Maths", date: "2026-02-17T10:30:00+05:30" },
-  { subject: "English", date: "2026-02-21T10:30:00+05:30" },
-  { subject: "Science", date: "2026-02-25T10:30:00+05:30" },
-  { subject: "Artificial Intelligence", date: "2026-02-27T10:30:00+05:30" },
-  { subject: "Sanskrit", date: "2026-02-28T10:30:00+05:30" },
-  { subject: "Social Science", date: "2026-03-07T10:30:00+05:30" }
-];
+  <div id="examList"></div>
 
-const container = document.getElementById("examList");
-const progressBar = document.getElementById("progressBar");
-const finished = document.getElementById("finished");
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
 
-function updateCountdown() {
-  container.innerHTML = "";
-  const now = new Date();
-  let completed = 0;
+  <div id="finished">✅ All exams completed! Well done, Soldier!</div>
 
-  exams.forEach(exam => {
-    const start = new Date(exam.date);
-    const end = new Date(start.getTime() + 3*60*60*1000); // 1:30 PM
-    const dayBefore = new Date(start.getTime() - 24*60*60*1000);
+  <script>
+    const exams = [
+      { subject: "Maths", date: "2026-02-17" },
+      { subject: "English", date: "2026-02-21" },
+      { subject: "Science", date: "2026-02-25" },
+      { subject: "Artificial Intelligence", date: "2026-02-27" },
+      { subject: "Sanskrit", date: "2026-02-28" },
+      { subject: "Social Science", date: "2026-03-07" },
+    ];
 
-    if(now > end) {
-      completed++;
-      return;
-    }
+    const container = document.getElementById('examList');
+    const progressBar = document.getElementById('progressBar');
+    const finishedText = document.getElementById('finished');
 
-    const div = document.createElement("div");
-    div.className = "subject";
-    div.innerHTML = `<h2>${exam.subject}</h2>`;
-
-    const countdown = document.createElement("p");
-    countdown.className = "countdown";
-
-    const message = document.createElement("p");
-    message.className = "message";
-
-    if(now >= dayBefore && now < start) {
-      message.textContent = `🌟 All the best for ${exam.subject}!`;
-    } else if(now < dayBefore) {
-      const diff = start - now;
+    function formatTime(diff) {
       const days = Math.floor(diff / (1000*60*60*24));
       const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
       const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-      countdown.textContent = `⏳ ${days} days, ${hours} hours, ${minutes} minutes left`;
+      const seconds = Math.floor((diff % (1000*60)) / 1000);
+      return {days, hours, minutes, seconds};
     }
 
-    div.appendChild(countdown);
-    div.appendChild(message);
-    container.appendChild(div);
-  });
+    function updateCountdown() {
+      container.innerHTML = '';
+      const now = new Date();
+      let completedCount = 0;
+      let nextExamIndex = -1;
 
-  const progressPercent = (completed / exams.length) * 100;
-  progressBar.style.width = progressPercent + "%";
+      // Filter exams to only those not yet finished (after 1:30 PM exam day)
+      const activeExams = exams.filter(exam => {
+        const examEnd = new Date(`${exam.date}T13:30:00`);
+        return now <= examEnd;
+      });
 
-  finished.style.display = completed === exams.length ? "block" : "none";
-}
+      // Count completed exams
+      completedCount = exams.length - activeExams.length;
 
-updateCountdown();
-setInterval(updateCountdown, 60000);
-</script>
+      // Find next upcoming exam (closest future exam start)
+      for(let i=0; i<activeExams.length; i++) {
+        const examStart = new Date(`${activeExams[i].date}T10:30:00`);
+        if(now < examStart) {
+          nextExamIndex = i;
+          break;
+        }
+      }
+      // If all exams started, and still events left, highlight first ongoing exam as next
+      if(nextExamIndex === -1 && activeExams.length > 0) {
+        nextExamIndex = 0;
+      }
+
+      activeExams.forEach((exam, i) => {
+        const examStart = new Date(`${exam.date}T10:30:00`);
+        const examEnd = new Date(`${exam.date}T13:30:00`);
+        const dayBefore = new Date(examStart.getTime() - 24*60*60*1000);
+
+        const div = document.createElement('div');
+        div.classList.add('subject');
+        if (i === nextExamIndex) div.classList.add('next');
+
+        const title = document.createElement('h2');
+        title.textContent = exam.subject;
+        div.appendChild(title);
+
+        const countdownP = document.createElement('p');
+        countdownP.classList.add('countdown');
+
+        const messageP = document.createElement('p');
+        messageP.classList.add('message');
+
+        if (now >= dayBefore && now < examStart) {
+          messageP.textContent = `🌟 All the best for ${exam.subject}!`;
+          countdownP.textContent = '';
+        } else if (now < dayBefore) {
+          const diff = examStart - now;
+          const {days, hours, minutes} = formatTime(diff);
+          countdownP.textContent = `⏳ ${days}d ${hours}h ${minutes}m left`;
+        } else if (now >= examStart && now <= examEnd) {
+          countdownP.textContent = '⏳ Exam in progress...';
+          messageP.textContent = '';
+        } else {
+          return; // past exam end; filtered out before but just safety
+        }
+
+        div.appendChild(countdownP);
+        div.appendChild(messageP);
+        container.appendChild(div);
+      });
+
+      // Update progress bar with smooth animation
+      const progressPercent = (completedCount / exams.length) * 100;
+      progressBar.style.width = progressPercent + '%';
+
+      if (completedCount === exams.length) {
+        finishedText.style.display = 'block';
+      } else {
+        finishedText.style.display = 'none';
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60000); // Update every minute
+  </script>
 </body>
 </html>
