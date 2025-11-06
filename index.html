@@ -14,121 +14,147 @@
     }
     
     body {
-      background: linear-gradient(180deg, #ecf0f5 0%, #d5dce5 100%);
+      background: linear-gradient(135deg, #e8eef2 0%, #d1dce8 50%, #e0e8f0 100%);
       color: #2c3e50;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
-      padding: 2rem 1rem;
+      padding: 3rem 1.5rem;
     }
     
     .container {
-      max-width: 700px;
+      max-width: 650px;
       margin: 0 auto;
     }
     
     h1 {
-      font-size: 2rem;
-      color: #1e3a8a;
-      margin-bottom: 0.5rem;
+      font-size: 2.3rem;
+      color: #1a2f4a;
+      margin-bottom: 0.8rem;
       text-align: center;
       font-weight: 700;
+      letter-spacing: -0.5px;
     }
     
     .subtitle {
       font-size: 0.95rem;
-      color: #475569;
-      margin-bottom: 2rem;
+      color: #546e7a;
+      margin-bottom: 2.5rem;
       text-align: center;
-      line-height: 1.5;
+      line-height: 1.6;
+      font-weight: 500;
     }
     
     .subtitle a {
-      color: #2563eb;
+      color: #3366cc;
       text-decoration: none;
       font-weight: 600;
-      border-bottom: 2px solid #2563eb;
+      border-bottom: 2px solid #3366cc;
       transition: all 0.3s ease;
     }
     
     .subtitle a:hover {
-      color: #1e40af;
-      border-bottom-color: #1e40af;
+      color: #1a4d99;
+      border-bottom-color: #1a4d99;
     }
     
     #examList {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 1.3rem;
+      margin-bottom: 2.5rem;
     }
     
     .subject {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(240,245,250,0.6) 100%);
+      border-radius: 14px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 15px rgba(26, 47, 74, 0.08);
       cursor: pointer;
-      transition: all 0.3s ease;
-      border-left: 5px solid #2563eb;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 5px solid #3366cc;
+      backdrop-filter: blur(10px);
     }
     
     .subject:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(26, 47, 74, 0.15);
+      transform: translateY(-3px);
+      border-left-color: #2d5ab8;
     }
     
     .subject.highlight {
-      border-left-color: #059669;
-      background: #f0fdf4;
-      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.2);
+      border-left-color: #10b981;
+      background: linear-gradient(135deg, rgba(240, 253, 250, 0.8) 0%, rgba(220, 252, 231, 0.6) 100%);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
     }
     
     .subject h2 {
-      font-size: 1.3rem;
-      color: #1e3a8a;
-      margin-bottom: 0.3rem;
+      font-size: 1.35rem;
+      color: #1a2f4a;
+      margin-bottom: 0.5rem;
       font-weight: 700;
     }
     
     .exam-date {
       font-size: 0.95rem;
-      color: #64748b;
-      margin-bottom: 0.5rem;
+      color: #7a8f99;
+      margin-bottom: 0.8rem;
       font-weight: 500;
     }
     
     .countdown {
-      font-size: 1rem;
-      color: #2563eb;
-      font-weight: 600;
-      margin: 0.3rem 0;
+      font-size: 1.05rem;
+      color: #3366cc;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      letter-spacing: 0.3px;
     }
     
     .message {
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      color: #059669;
+      font-size: 1.05rem;
+      margin-top: 0.7rem;
+      color: #10b981;
       font-weight: 700;
+      letter-spacing: 0.3px;
     }
     
     .portions {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: #f8fafc;
-      border-left: 4px solid #2563eb;
-      border-radius: 8px;
-      max-height: 450px;
+      margin-top: 1.2rem;
+      padding: 1.2rem;
+      background: linear-gradient(135deg, rgba(230, 240, 250, 0.8) 0%, rgba(220, 235, 245, 0.8) 100%);
+      border-left: 4px solid #3366cc;
+      border-radius: 10px;
+      max-height: 480px;
       overflow-y: auto;
       display: none;
       text-align: left;
     }
     
+    .portions::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .portions::-webkit-scrollbar-track {
+      background: rgba(230, 240, 250, 0.5);
+      border-radius: 10px;
+    }
+    
+    .portions::-webkit-scrollbar-thumb {
+      background: #3366cc;
+      border-radius: 10px;
+    }
+    
+    .portions::-webkit-scrollbar-thumb:hover {
+      background: #2d5ab8;
+    }
+    
     .portions b {
-      color: #1e3a8a;
+      color: #1a2f4a;
       font-weight: 700;
       display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.98rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .portions ul {
@@ -138,59 +164,91 @@
     }
     
     .portions li {
-      color: #334155;
-      margin: 0.5rem 0;
-      padding-left: 1.5rem;
+      color: #364959;
+      margin: 0.6rem 0;
+      padding-left: 1.8rem;
       position: relative;
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
     
     .portions li:before {
-      content: "•";
-      color: #2563eb;
-      font-weight: bold;
+      content: "●";
+      color: #3366cc;
+      font-size: 0.8rem;
       position: absolute;
-      left: 0;
+      left: 0.3rem;
+      top: 0.25rem;
     }
     
     .subject.open .portions {
       display: block;
+      animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     #progressContainer {
-      margin-top: 2rem;
-      background: #ffffff;
-      border-radius: 12px;
-      height: 12px;
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, rgba(240, 245, 250, 0.8) 0%, rgba(225, 235, 245, 0.8) 100%);
+      border-radius: 14px;
+      height: 14px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 15px rgba(26, 47, 74, 0.1);
+      backdrop-filter: blur(10px);
     }
     
     #progressBar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      background: linear-gradient(90deg, #3366cc 0%, #5a8fff 100%);
       transition: width 0.8s ease;
-      border-radius: 12px;
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(51, 102, 204, 0.4);
     }
     
     #finished {
-      margin-top: 2rem;
-      font-size: 1.5rem;
-      color: #059669;
+      margin-top: 2.5rem;
+      font-size: 1.6rem;
+      color: #10b981;
       text-align: center;
       display: none;
       font-weight: 700;
+      letter-spacing: 0.5px;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
     
     @media (max-width: 480px) {
+      body {
+        padding: 2rem 1rem;
+      }
+      
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
+      
       .subject {
-        padding: 1.2rem;
+        padding: 1.4rem;
       }
+      
       .portions {
         max-height: 350px;
       }
@@ -256,7 +314,8 @@
       return {
         days: Math.floor(diff / (1000*60*60*24)),
         hours: Math.floor((diff % (1000*60*60*24)) / (1000*60*60)),
-        minutes: Math.floor((diff % (1000*60*60)) / (1000*60))
+        minutes: Math.floor((diff % (1000*60*60)) / (1000*60)),
+        seconds: Math.floor((diff % (1000*60)) / 1000)
       };
     }
 
@@ -275,44 +334,4 @@
       active.forEach(exam => {
         const start = new Date(`${exam.date}T10:30:00`);
         const end = new Date(`${exam.date}T13:30:00`);
-        const dayBefore = new Date(start.getTime() - 24*60*60*1000);
-
-        const div = document.createElement('div');
-        div.classList.add('subject');
-
-        if (now >= dayBefore && now < start) {
-          div.classList.add('highlight');
-        }
-
-        const title = document.createElement('h2');
-        title.textContent = exam.subject;
-        div.appendChild(title);
-
-        const dateDiv = document.createElement('div');
-        dateDiv.className = 'exam-date';
-        dateDiv.textContent = getDateStr(exam.date);
-        div.appendChild(dateDiv);
-
-        const countdownP = document.createElement('div');
-        countdownP.className = 'countdown';
-
-        const messageP = document.createElement('div');
-        messageP.className = 'message';
-
-        if (now >= dayBefore && now < start) {
-          const subjectName = exam.subject.split('[')[0].trim();
-          messageP.textContent = `All the best for ${subjectName}!`;
-        } else if (now < dayBefore) {
-          const {days, hours, minutes} = formatTime(start - now);
-          countdownP.textContent = `${days}d ${hours}h ${minutes}m left`;
-        } else if (now >= start && now <= end) {
-          countdownP.textContent = 'Exam in progress...';
-        }
-
-        div.appendChild(countdownP);
-        div.appendChild(messageP);
-
-        const portionDiv = document.createElement('div');
-        portionDiv.className = 'portions';
-        portionDiv.innerHTML = exam.portions;
-        div.appendChil
+        const dayB
